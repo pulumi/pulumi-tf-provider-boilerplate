@@ -11,12 +11,12 @@
 # you wish to pin to.
 #
 # If it is necessary to fork the provider, set the `name` to the canonical import
-# path (i.e. github.com/terraform-providers/terraform-provider-x), and set the
+# path (i.e. github.com/terraform-providers/terraform-provider-xyz), and set the
 # `source` to the fork address. Then set the `branch` to `pulumi-master` in the
 # fork, and ensure `version` is not set.
 [[constraint]]
   version = "v1.0.0"
-  name = "github.com/terraform-providers/terraform-provider-x"
+  name = "github.com/terraform-providers/terraform-provider-xyz"
 
   [constraint.metadata]
     govendor-override = true

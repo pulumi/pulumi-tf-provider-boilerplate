@@ -1,7 +1,7 @@
-PROJECT_NAME := X Package
+PROJECT_NAME := xyz Package
 include build/common.mk
 
-PACK             := x
+PACK             := xyz
 PACKDIR          := sdk
 PROJECT          := github.com/pulumi/pulumi-${PACK}
 NODE_MODULE_NAME := @pulumi/${PACK}

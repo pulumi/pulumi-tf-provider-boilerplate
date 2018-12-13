@@ -17,11 +17,11 @@ package main
 import (
 	"github.com/pulumi/pulumi-terraform/pkg/tfbridge"
 
-	"github.com/pulumi/pulumi-x"
-	"github.com/pulumi/pulumi-x/pkg/version"
+	xyz "github.com/pulumi/pulumi-xyz"
+	"github.com/pulumi/pulumi-xyz/pkg/version"
 )
 
 func main() {
 	// Modify the path to point to the new provider
-	tfbridge.Main("x", version.Version, x.Provider())
+	tfbridge.Main("xyz", version.Version, xyz.Provider())
 }
