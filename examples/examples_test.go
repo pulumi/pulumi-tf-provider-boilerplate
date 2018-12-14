@@ -5,9 +5,6 @@ package examples
 import (
 	"io/ioutil"
 	"net/http"
-	"os"
-	"path"
-	"path/filepath"
 	"testing"
 	"time"
 

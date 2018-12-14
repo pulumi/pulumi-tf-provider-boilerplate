@@ -12,27 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package x
+package xyz
 
 import (
-	"errors"
-	"strings"
 	"unicode"
 
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
-	homedir "github.com/mitchellh/go-homedir"
 	"github.com/pulumi/pulumi-terraform/pkg/tfbridge"
 	"github.com/pulumi/pulumi/pkg/resource"
 	"github.com/pulumi/pulumi/pkg/tokens"
+	"github.com/terraform-providers/terraform-provider-xyz/xyz"
 )
 
 // all of the token components used below.
 const (
 	// packages:
-	mainPkg = "x"
+	mainPkg = "xyz"
 	// modules:
-	yMod = "y" // the y module
+	mainMod = "index" // the y module
 )
 
 // makeMember manufactures a type token for the package and the given module and type.
@@ -89,17 +87,17 @@ var managedByPulumi = &tfbridge.DefaultInfo{Value: "Managed by Pulumi"}
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := x.Provider().(*schema.Provider)
+	p := xyz.Provider().(*schema.Provider)
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
 		P:           p,
-		Name:        "x",
-		Description: "A Pulumi package for creating and managing X cloud resources.",
-		Keywords:    []string{"pulumi", "x"},
+		Name:        "xyz",
+		Description: "A Pulumi package for creating and managing xyz cloud resources.",
+		Keywords:    []string{"pulumi", "xyz"},
 		License:     "Apache-2.0",
 		Homepage:    "https://pulumi.io",
-		Repository:  "https://github.com/pulumi/pulumi-x",
+		Repository:  "https://github.com/pulumi/pulumi-xyz",
 		Config:      map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
@@ -115,7 +113,7 @@ func Provider() tfbridge.ProviderInfo {
 			// Map each resource in the Terraform provider to a Pulumi type. An example
 			// is below.
 			// "aws_acm_certificate": {
-			// 	Tok: makeResource(yMod, "Certificate"),
+			// 	Tok: makeResource(mainMod, "Certificate"),
 			// 	Fields: map[string]*tfbridge.SchemaInfo{
 			// 		"tags": {Type: makeType(mainPkg, "Tags")},
 			// 	},
@@ -124,7 +122,7 @@ func Provider() tfbridge.ProviderInfo {
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi function. An example
 			// is below.
-			// "aws_ami": {Tok: makeDataSource(yMod, "getAmi")},
+			// "aws_ami": {Tok: makeDataSource(mainMod, "getAmi")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// List any npm dependencies and their versions
