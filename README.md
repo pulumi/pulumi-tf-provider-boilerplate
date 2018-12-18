@@ -46,17 +46,17 @@ This package is available in many languages in the standard packaging formats.
 
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
-    $ npm install @pulumi/x
+    $ npm install @pulumi/xyz
 
 or `yarn`:
 
-    $ yarn add @pulumi/x
+    $ yarn add @pulumi/xyz
 
 ### Python
 
 To use from Python, install using `pip`:
 
-    $ pip install pulumi_x
+    $ pip install pulumi_xyz
 
 ### Go
 
