@@ -110,8 +110,12 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		PreConfigureCallback: preConfigureCallback,
 		Resources:            map[string]*tfbridge.ResourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi type. An example
-			// is below.
+			// Map each resource in the Terraform provider to a Pulumi type. Two examples
+			// are below - the single line form is the common case. The multi-line form is
+			// needed only if you wish to override types or other default options.
+			//
+			// "aws_iam_role": {Tok: makeResource(mainMod, "IamRole")}
+			//
 			// "aws_acm_certificate": {
 			// 	Tok: makeResource(mainMod, "Certificate"),
 			// 	Fields: map[string]*tfbridge.SchemaInfo{
