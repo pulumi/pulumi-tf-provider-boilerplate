@@ -1,7 +1,8 @@
 # Terraform Bridge Provider Boilerplate
 
 This repository contains boilerplate code for building a new Pulumi provider which wraps an existing
-Terraform provider.
+Terraform provider, if the existing provider uses _Go Modules_ (common now) or _govendor_ (common
+in the past and still found in the wild).
 
 Modify this README to describe:
 
@@ -24,15 +25,26 @@ Next, replace references to `xyz` with the name of your provider:
 
 > Note: If the name of the desired Pulumi provider differs from the name of the Terraform provider, you will need to carefully distinguish between the references - see https://github.com/pulumi/pulumi-azure for an example.
 
+### If the provider uses Go Modules
+
+Lock in dependency versions:
+
+- `go get github.com/pulumi/scripts/gomod-override`
+- Update the version number of the Terraform provider in `Gopkg.template.toml` to match the latest available version.
+- `gomod-override < Gopkg.template.toml > Gopkg.toml`
+- `make ensure`
+
+### If the provider uses Go Modules
 
 Lock in dependency versions:
 
 - `go get github.com/pulumi/scripts/govendor-override`
-- Update the version number of the Terraform provider in `Gopkg.template.toml` to match the latest available version.
+- Update the version number of the Terraform provider in `Gopkg.template.toml` to match the latest available version. Change the
+  metadata attributes prefixed with `gomod` to be prefixed with `govendor`, leaving the values the same.
 - `govendor-override < Gopkg.template.toml > Gopkg.toml`
 - `make ensure`
 
-Finally, build the provider:
+### Build the provider:
 
 - Edit `resources.go` to map each resource, and specify provider information
 - Enumerate any examples in `examples/examples_test.go`
