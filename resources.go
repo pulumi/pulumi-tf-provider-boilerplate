@@ -150,5 +150,22 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
+	// For all resources with name properties, we will add an auto-name property.  Make sure to skip those that
+	// already have a name mapping entry, since those may have custom overrides set above (e.g., for length).
+	const nameProperty = "name"
+	for resname, res := range prov.Resources {
+		if schema := p.ResourcesMap[resname]; schema != nil {
+			// Only apply auto-name to input properties (Optional || Required) named `name`
+			if tfs, has := schema.Schema[nameProperty]; has && (tfs.Optional || tfs.Required) {
+				if _, hasfield := res.Fields[nameProperty]; !hasfield {
+					if res.Fields == nil {
+						res.Fields = make(map[string]*tfbridge.SchemaInfo)
+					}
+					res.Fields[nameProperty] = tfbridge.AutoName(nameProperty, 255)
+				}
+			}
+		}
+	}
+
 	return prov
 }
