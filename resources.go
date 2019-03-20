@@ -110,8 +110,12 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		PreConfigureCallback: preConfigureCallback,
 		Resources:            map[string]*tfbridge.ResourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi type. An example
-			// is below.
+			// Map each resource in the Terraform provider to a Pulumi type. Two examples
+			// are below - the single line form is the common case. The multi-line form is
+			// needed only if you wish to override types or other default options.
+			//
+			// "aws_iam_role": {Tok: makeResource(mainMod, "IamRole")}
+			//
 			// "aws_acm_certificate": {
 			// 	Tok: makeResource(mainMod, "Certificate"),
 			// 	Fields: map[string]*tfbridge.SchemaInfo{
@@ -144,6 +148,23 @@ func Provider() tfbridge.ProviderInfo {
 				"pulumi": ">=0.16.4,<0.17.0",
 			},
 		},
+	}
+
+	// For all resources with name properties, we will add an auto-name property.  Make sure to skip those that
+	// already have a name mapping entry, since those may have custom overrides set above (e.g., for length).
+	const nameProperty = "name"
+	for resname, res := range prov.Resources {
+		if schema := p.ResourcesMap[resname]; schema != nil {
+			// Only apply auto-name to input properties (Optional || Required) named `name`
+			if tfs, has := schema.Schema[nameProperty]; has && (tfs.Optional || tfs.Required) {
+				if _, hasfield := res.Fields[nameProperty]; !hasfield {
+					if res.Fields == nil {
+						res.Fields = make(map[string]*tfbridge.SchemaInfo)
+					}
+					res.Fields[nameProperty] = tfbridge.AutoName(nameProperty, 255)
+				}
+			}
+		}
 	}
 
 	return prov
