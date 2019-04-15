@@ -34,7 +34,7 @@ Lock in dependency versions:
 - `gomod-override < Gopkg.template.toml > Gopkg.toml`
 - `make ensure`
 
-### If the provider uses Go Modules
+### If the provider does not use Go Modules
 
 Lock in dependency versions:
 
