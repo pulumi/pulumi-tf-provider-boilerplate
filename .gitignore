@@ -2,6 +2,7 @@
 .pulumi
 **/bin/
 Pulumi.*.yaml
+sdk/nodejs/node_modules
 
 **/command-output/
 
