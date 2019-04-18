@@ -1,8 +1,7 @@
 # Terraform Bridge Provider Boilerplate
 
 This repository contains boilerplate code for building a new Pulumi provider which wraps an existing
-Terraform provider, if the existing provider uses _Go Modules_ (common now) or _govendor_ (common
-in the past and still found in the wild).
+Terraform provider, if the existing provider uses _Go Modules_.
 
 Modify this README to describe:
 
@@ -22,26 +21,20 @@ git clone https://github.com/pulumi/pulumi-tf-provider-boilerplate pulumi-xyz
 Next, replace references to `xyz` with the name of your provider:
 - Search/replace the string `xyz` with the name of your provider throughout this repo
 - Rename the `cmd/pulumi-{resource,tfgen}-xyz` directories to match the provider name
+- Replace the module name in `go.mod` to reflect the repository name.
+- If the pulumi provider name differs from the Terraform provider name, set
+  `TF_NAME` in `Makefile` to the Terraform name, leaving `PACK` set to the
+  Pulumi name.
 
 > Note: If the name of the desired Pulumi provider differs from the name of the Terraform provider, you will need to carefully distinguish between the references - see https://github.com/pulumi/pulumi-azure for an example.
 
-### If the provider uses Go Modules
+### Add dependencies
 
-Lock in dependency versions:
+In the root of the repository, run:
 
-- `go get github.com/pulumi/scripts/gomod-override`
-- Update the version number of the Terraform provider in `Gopkg.template.toml` to match the latest available version.
-- `gomod-override < Gopkg.template.toml > Gopkg.toml`
-- `make ensure`
-
-### If the provider does not use Go Modules
-
-Lock in dependency versions:
-
-- `go get github.com/pulumi/scripts/govendor-override`
-- Update the version number of the Terraform provider in `Gopkg.template.toml` to match the latest available version. Change the
-  metadata attributes prefixed with `gomod` to be prefixed with `govendor`, leaving the values the same.
-- `govendor-override < Gopkg.template.toml > Gopkg.toml`
+- `GO111MODULE=on go get github.com/pulumi/pulumi-terraform@master`
+- `GO111MODULE=on go get github.com/terraform-providers/terraform-provider-xyz` (where `xyz` is the name of the provider)
+- `GO111MODULE=on go mod vendor`
 - `make ensure`
 
 ### Build the provider:
