@@ -34,6 +34,7 @@ Next, replace references to `xyz` with the name of your provider:
 
 In the root of the repository, run:
 
+- `go get github.com/pulumi/scripts/gomod-doccopy` (Note: do not set `GO111MODULE=on` here)
 - `GO111MODULE=on go get github.com/pulumi/pulumi-terraform@master`
 - `GO111MODULE=on go get github.com/terraform-providers/terraform-provider-xyz` (where `xyz` is the name of the provider)
 - `GO111MODULE=on go mod vendor`
