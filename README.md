@@ -22,6 +22,7 @@ git clone https://github.com/pulumi/pulumi-tf-provider-boilerplate pulumi-xyz
 
 Next, replace references to `xyz` with the name of your provider:
 - Search/replace the string `xyz` with the name of your provider throughout this repo
+- List the configuration points for the provider in the area of the README
 - Rename the `cmd/pulumi-{resource,tfgen}-xyz` directories to match the provider name
 - Replace the module name in `go.mod` to reflect the repository name.
 - If the pulumi provider name differs from the Terraform provider name, set
@@ -71,6 +72,13 @@ To use from Python, install using `pip`:
 To use from Go, use `go get` to grab the latest version of the library
 
     $ go get github.com/pulumi/pulumi-xyz/sdk/go/...
+
+## Configuration
+
+The following configuration points are available for the `xyz` provider:
+
+- `xyz:apiKey` (environment: `XYZ_API_KEY`) - the API key for `xyz`
+- `xyz:region` (environment: `XYZ_REGION`) - the region in which to deploy resources
 
 ## Reference
 
