@@ -85,4 +85,4 @@ The following configuration points are available for the `xyz` provider:
 For detailed reference documentation, please visit [the API docs][1].
 
 
-[1]: https://pulumi.io/reference/pkg/nodejs/@pulumi/x/index.html
+[1]: https://pulumi.io/reference/pkg/nodejs/pulumi/x/
