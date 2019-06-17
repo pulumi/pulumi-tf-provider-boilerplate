@@ -33,6 +33,10 @@ Next, replace references to `xyz` with the name of your provider:
 
 ### Add dependencies
 
+In order to properly build the sdks, the following tools are expected:
+- tf2pulumi (See the project's README for installation instructions: https://github.com/pulumi/tf2pulumi)
+- pandoc (`brew install pandoc`)
+
 In the root of the repository, run:
 
 - `go get github.com/pulumi/scripts/gomod-doccopy` (Note: do not set `GO111MODULE=on` here)
