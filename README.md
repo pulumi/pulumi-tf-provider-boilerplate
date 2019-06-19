@@ -20,14 +20,14 @@ First, clone this repo with the name of the desired provider in place of `xyz`:
 git clone https://github.com/pulumi/pulumi-tf-provider-boilerplate pulumi-xyz
 ```
 
-Next, replace references to `xyz` with the name of your provider:
-- Search/replace the string `xyz` with the name of your provider throughout this repo
-- List the configuration points for the provider in the area of the README
-- Rename the `cmd/pulumi-{resource,tfgen}-xyz` directories to match the provider name
-- Replace the module name in `go.mod` to reflect the repository name.
-- If the pulumi provider name differs from the Terraform provider name, set
-  `TF_NAME` in `Makefile` to the Terraform name, leaving `PACK` set to the
-  Pulumi name.
+Second, replace references to `xyz` with the name of your provider:
+
+```
+make prepare NAME=foo REPOSITORY=github.com/pulumi/pulumi-foo
+```
+
+Next, list the configuration points for the provider in the area of the README.
+
 
 > Note: If the name of the desired Pulumi provider differs from the name of the Terraform provider, you will need to carefully distinguish between the references - see https://github.com/pulumi/pulumi-azure for an example.
 

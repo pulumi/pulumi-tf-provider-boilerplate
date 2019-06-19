@@ -1,5 +1,8 @@
-## 0.x.x (unreleased)
+CHANGELOG
+=========
 
-### Major Changes
+## HEAD (Unreleased)
+* Add prepare command to rename the `xyz` occurrences
 
-### Improvements
+---
+
