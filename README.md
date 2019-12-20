@@ -12,8 +12,6 @@ Modify this README to describe:
 
 ## Creating a Pulumi Terraform Bridge Provider
 
-*Note: Go 1.12 is needed to build Pulumi providers using Go Modules. Currently, we recommend pinning the version in `.travis.yml` to `1.12.1` to work around an issue with running later versions on Travis CI.*
-
 First, clone this repo with the name of the desired provider in place of `xyz`:
 
 ```
