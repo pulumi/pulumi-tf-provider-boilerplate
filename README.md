@@ -37,15 +37,14 @@ In order to properly build the sdks, the following tools are expected:
 
 In the root of the repository, run:
 
-- `go get github.com/pulumi/scripts/gomod-doccopy` (Note: do not set `GO111MODULE=on` here)
 - `GO111MODULE=on go get github.com/pulumi/pulumi-terraform@master`
-- `GO111MODULE=on go get github.com/terraform-providers/terraform-provider-xyz` (where `xyz` is the name of the provider)
-- `GO111MODULE=on go mod vendor`
+- `(cd provider && go get github.com/terraform-providers/terraform-provider-foo)`  (where `foo` is the name of the provider - note the parenthesis to run this in a subshell)
+- `(cd provider && go mod vendor)`
 - `make ensure`
 
 ### Build the provider:
 
-- Edit `resources.go` to map each resource, and specify provider information
+- Edit `provider/resources.go` to map each resource, and specify provider information
 - Enumerate any examples in `examples/examples_test.go`
 - `make`
 
