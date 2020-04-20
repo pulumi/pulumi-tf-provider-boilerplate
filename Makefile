@@ -29,19 +29,19 @@ EMPTY_TO_AVOID_SED := ""
 prepare::
 	@if test -z "${NAME}"; then echo "NAME not set"; exit 1; fi
 	@if test -z "${REPOSITORY}"; then echo "REPOSITORY not set"; exit 1; fi
-	@if test ! -d "cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz"; then "Project already prepared"; exit 1; fi
+	@if test ! -d "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz"; then "Project already prepared"; exit 1; fi
 
-	mv "cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz" cmd/pulumi-tfgen-${NAME}
-	mv "cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" cmd/pulumi-resource-${NAME}
+	mv "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-tfgen-${NAME}
+	mv "provider/cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-resource-${NAME}
 
 	if [[ "${OS}" != "Darwin" ]]; then \
-		sed -i 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' go.mod; \
+		sed -i 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' provider/go.mod; \
 		find ./ ! -path './.git/*' -type f -exec sed -i 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
 	fi
 
 	# In MacOS the -i parameter needs an empty string to execute in place.
 	if [[ "${OS}" == "Darwin" ]]; then \
-		sed -i '' 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' go.mod; \
+		sed -i '' 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' provider/go.mod; \
 		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
 	fi
 
@@ -69,16 +69,15 @@ build:: tfgen provider
 		dotnet build /p:Version=${DOTNET_VERSION}
 
 tfgen::
-	go install -ldflags "-X github.com/pulumi/pulumi-${PACK}/pkg/version.Version=${VERSION}" ${PROJECT}/cmd/${TFGEN}
+	go install -ldflags "-X github.com/pulumi/pulumi-${PACK}/provider/pkg/version.Version=${VERSION}" ${PROJECT}/provider/cmd/${TFGEN}
 
 provider::
-	go install -ldflags "-X github.com/pulumi/pulumi-${PACK}/pkg/version.Version=${VERSION}" ${PROJECT}/cmd/${PROVIDER}
+	go install -ldflags "-X github.com/pulumi/pulumi-${PACK}/provider/pkg/version.Version=${VERSION}" ${PROJECT}/provider/cmd/${PROVIDER}
 
 lint::
 	golangci-lint run
 
 install::
-	GOBIN=$(PULUMI_BIN) go install -ldflags "-X github.com/pulumi/pulumi-${PACK}/pkg/version.Version=${VERSION}" ${PROJECT}/cmd/${PROVIDER}
 	[ ! -e "$(PULUMI_NODE_MODULES)/$(NODE_MODULE_NAME)" ] || rm -rf "$(PULUMI_NODE_MODULES)/$(NODE_MODULE_NAME)"
 	mkdir -p "$(PULUMI_NODE_MODULES)/$(NODE_MODULE_NAME)"
 	cp -r ${PACKDIR}/nodejs/bin/. "$(PULUMI_NODE_MODULES)/$(NODE_MODULE_NAME)"
@@ -90,7 +89,10 @@ install::
 	cd ${PACKDIR}/python/bin && $(PIP) install --user -e .
 
 test_all::
-	PATH=$(PULUMI_BIN):$(PATH) go test -v -count=1 -cover -timeout 1h -parallel ${TESTPARALLELISM} ./examples
+	cd examples && $(GO_TEST) .
+
+test_fast::
+	cd examples && $(GO_TEST_FAST) .
 
 .PHONY: publish_tgz
 publish_tgz:
