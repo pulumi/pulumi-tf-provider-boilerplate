@@ -129,6 +129,7 @@ func Provider() tfbridge.ProviderInfo {
 			// "aws_ami": {Tok: makeDataSource(mainMod, "getAmi")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
+			AsyncDataSources: true,
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^2.0.0",
