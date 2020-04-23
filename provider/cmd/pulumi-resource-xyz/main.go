@@ -25,5 +25,5 @@ import (
 
 func main() {
 	// Modify the path to point to the new provider
-	tfbridge.Main("xyz", version.Version, xyz.Provider())
+	tfbridge.Main("xyz", version.Version, xyz.Provider(), pulumiSchema)
 }
