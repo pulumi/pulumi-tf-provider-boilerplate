@@ -36,13 +36,13 @@ prepare::
 	mv "provider/cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-resource-${NAME}
 
 	if [[ "${OS}" != "Darwin" ]]; then \
-		sed -i 's,github.com/pulumi/pulumi-xyz,${PROJECT},g' provider/go.mod; \
+		find ./ ! -path './.git/*' -type f -exec sed -i 's,github.com/pulumi/pulumi-[x]yz,${PROJECT},g' {} \; &> /dev/null; \
 		find ./ ! -path './.git/*' -type f -exec sed -i 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
 	fi
 
 	# In MacOS the -i parameter needs an empty string to execute in place.
 	if [[ "${OS}" == "Darwin" ]]; then \
-		sed -i '' 's,github.com/pulumi/pulumi-xyz,${PROJECT},g' provider/go.mod; \
+		find ./ ! -path './.git/*' -type f -exec sed -i '' 's,github.com/pulumi/pulumi-[x]yz,${PROJECT},g' {} \; &> /dev/null; \
 		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
 	fi
 
