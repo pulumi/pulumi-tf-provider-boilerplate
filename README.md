@@ -21,7 +21,7 @@ git clone https://github.com/pulumi/pulumi-tf-provider-boilerplate pulumi-xyz
 Second, replace references to `xyz` with the name of your provider:
 
 ```
-make prepare NAME=foo REPOSITORY=github.com/pulumi/pulumi-foo
+make prepare NAME=foo PROJECT=github.com/pulumi/pulumi-foo
 ```
 
 Next, list the configuration points for the provider in the area of the README.
@@ -37,9 +37,7 @@ In order to properly build the sdks, the following tools are expected:
 
 In the root of the repository, run:
 
-- `GO111MODULE=on go get github.com/pulumi/pulumi-terraform@master`
 - `(cd provider && go get github.com/terraform-providers/terraform-provider-foo)`  (where `foo` is the name of the provider - note the parenthesis to run this in a subshell)
-- `(cd provider && go mod vendor)`
 - `make ensure`
 
 ### Build the provider:
