@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # publish_tgz.sh builds and publishes the tarballs that our other repositories consume.
 set -o nounset -o errexit -o pipefail
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # publish-plugin.sh builds and publishes a package containing the resource provider to
 # s3://rel.pulumi.com/releases/plugins.
 set -o nounset -o errexit -o pipefail

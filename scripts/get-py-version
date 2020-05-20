@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -o nounset -o errexit -o pipefail
 
 SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

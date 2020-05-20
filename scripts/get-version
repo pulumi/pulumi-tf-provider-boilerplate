@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -o nounset -o errexit -o pipefail
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 COMMITISH=${1:-HEAD}
