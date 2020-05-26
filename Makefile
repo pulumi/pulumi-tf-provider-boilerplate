@@ -11,6 +11,8 @@ TFGEN           := pulumi-tfgen-${PACK}
 PROVIDER        := pulumi-resource-${PACK}
 VERSION         := $(shell scripts/get-version)
 PYPI_VERSION    := $(shell cd scripts && ./get-py-version)
+LATEST_RESOURCE_PROVIDER_VERSION := $(shell curl --silent "https://api.github.com/repos/pulumi/pulumi-${PACK}/tags" | jq ".[0]".name -r)
+PROVIDER_VERSION := ${LATEST_RESOURCE_PROVIDER_VERSION:v%=%}
 
 DOTNET_PREFIX  := $(firstword $(subst -, ,${VERSION:v%=%})) # e.g. 1.5.0
 DOTNET_SUFFIX  := $(word 2,$(subst -, ,${VERSION:v%=%}))    # e.g. alpha.1
@@ -48,7 +50,7 @@ prepare::
 # NOTE: Since the plugin is published using the nodejs style semver version
 # We set the PLUGIN_VERSION to be the same as the version we use when building
 # the provider (e.g. x.y.z-dev-... instead of x.y.zdev...)
-build:: tfgen provider
+build:: install_plugin provider
 	cd provider && for LANGUAGE in "nodejs" "python" "go" "dotnet" ; do \
 		$(TFGEN) $$LANGUAGE --overlays overlays/$$LANGUAGE/ --out ../${PACKDIR}/$$LANGUAGE/ || exit 3 ; \
 	done
@@ -75,8 +77,12 @@ tfgen::
 	cd provider && go install -ldflags "-X github.com/pulumi/pulumi-${PACK}/provider/pkg/version.Version=${VERSION}" ${PROJECT}/provider/cmd/${TFGEN}
 
 provider:: generate_schema
-	cd provider && go generate cmd/${PROVIDER}/main.go
+	cd provider && VERSION=$(VERSION) go generate cmd/${PROVIDER}/main.go
 	cd provider && go install -ldflags "-X github.com/pulumi/pulumi-${PACK}/provider/pkg/version.Version=${VERSION}" ${PROJECT}/provider/cmd/${PROVIDER}
+
+install_plugins::
+	[ -x $(shell which pulumi) ] || curl -fsSL https://get.pulumi.com | sh
+	pulumi plugin install resource $(PACK) $(PROVIDER_VERSION)
 
 install::
 	[ ! -e "$(PULUMI_NODE_MODULES)/$(NODE_MODULE_NAME)" ] || rm -rf "$(PULUMI_NODE_MODULES)/$(NODE_MODULE_NAME)"
