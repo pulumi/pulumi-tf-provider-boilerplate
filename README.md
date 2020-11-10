@@ -32,21 +32,18 @@ Next, list the configuration points for the provider in the area of the README.
 ### Add dependencies
 
 In order to properly build the sdks, the following tools are expected:
-- tf2pulumi (See the project's README for installation instructions: https://github.com/pulumi/tf2pulumi)
-- pandoc (`brew install pandoc`)
+- `pulumictl` (See the project's README for installation instructions: https://github.com/pulumi/pulumictl)
 
 In the root of the repository, run:
 
 - `GO111MODULE=on go get github.com/pulumi/pulumi-terraform@master`
 - `(cd provider && go get github.com/terraform-providers/terraform-provider-foo)`  (where `foo` is the name of the provider - note the parenthesis to run this in a subshell)
-- `(cd provider && go mod vendor)`
-- `make ensure`
+- `(cd provider && go mod download)`
 
 ### Build the provider:
 
 - Edit `provider/resources.go` to map each resource, and specify provider information
-- Enumerate any examples in `examples/examples_test.go`
-- `make`
+- `make build_sdks`
 
 ## Installing
 

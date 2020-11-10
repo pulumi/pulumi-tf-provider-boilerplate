@@ -1,5 +1,4 @@
 linters:
-  enable-all: false
   enable:
     - deadcode
     - errcheck
@@ -17,3 +16,9 @@ linters:
     - structcheck
     - unconvert
     - varcheck
+  enable-all: false
+run:
+  skip-files:
+    - schema.go
+    - pulumiManifest.go
+  timeout: 10m

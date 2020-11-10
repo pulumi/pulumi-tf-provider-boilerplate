@@ -1,3 +1,3 @@
 module github.com/pulumi/pulumi-xyz/sdk
 
-go 1.14
+go 1.15
