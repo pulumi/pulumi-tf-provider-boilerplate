@@ -14,6 +14,8 @@ VERSION         := $(shell pulumictl get version)
 
 TESTPARALLELISM := 4
 
+WORKING_DIR     := $(shell pwd)
+
 OS := $(shell uname)
 EMPTY_TO_AVOID_SED := ""
 
