@@ -23,6 +23,10 @@ prepare::
 	@if test -z "${PROJECT}"; then echo "PROJECT not set"; exit 1; fi
 	@if test ! -d "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz"; then "Project already prepared"; exit 1; fi
 
+	GO111MODULE=on go get github.com/pulumi/pulumi-terraform@master
+	(cd provider && go get ${TF_REPO})
+	(cd provider && go mod download)
+
 	mv "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-tfgen-${PACK}
 	mv "provider/cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-resource-${PACK}
 
