@@ -18,11 +18,12 @@ First, clone this repo with the name of the desired provider in place of `xyz`:
 git clone https://github.com/pulumi/pulumi-tf-provider-boilerplate pulumi-xyz
 ```
 
+> Note: If the name of the desired Pulumi provider differs from the name of the Terraform provider, you will need to carefully distinguish between the references - see https://github.com/pulumi/pulumi-azure for an example.
+
 Second, prepare your repo for development. This commands replace references to `xyz` with the name of your provider, adds terraform module as dependency and download it.
 
 ```
 make prepare PACK=foo PROJECT=github.com/pulumi/pulumi-foo
-
 ```
 
 | arguments | meaning                          | default value                          |
@@ -35,7 +36,6 @@ make prepare PACK=foo PROJECT=github.com/pulumi/pulumi-foo
 
 Next, list the configuration points for the provider in the area of the README.
 
-> Note: If the name of the desired Pulumi provider differs from the name of the Terraform provider, you will need to carefully distinguish between the references - see https://github.com/pulumi/pulumi-azure for an example.
 
 ### Add dependencies
 
