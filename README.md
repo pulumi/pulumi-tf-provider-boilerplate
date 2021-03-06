@@ -21,23 +21,23 @@ git clone https://github.com/pulumi/pulumi-tf-provider-boilerplate pulumi-xyz
 Second, replace references to `xyz` with the name of your provider:
 
 ```
-make prepare NAME=foo REPOSITORY=github.com/pulumi/pulumi-foo
+make prepare PACK=foo PROJECT=github.com/pulumi/pulumi-foo
 ```
 
 Next, list the configuration points for the provider in the area of the README.
-
 
 > Note: If the name of the desired Pulumi provider differs from the name of the Terraform provider, you will need to carefully distinguish between the references - see https://github.com/pulumi/pulumi-azure for an example.
 
 ### Add dependencies
 
 In order to properly build the sdks, the following tools are expected:
+
 - `pulumictl` (See the project's README for installation instructions: https://github.com/pulumi/pulumictl)
 
 In the root of the repository, run:
 
 - `GO111MODULE=on go get github.com/pulumi/pulumi-terraform@master`
-- `(cd provider && go get github.com/terraform-providers/terraform-provider-foo)`  (where `foo` is the name of the provider - note the parenthesis to run this in a subshell)
+- `(cd provider && go get github.com/terraform-providers/terraform-provider-foo)` (where `foo` is the name of the provider - note the parenthesis to run this in a subshell)
 - `(cd provider && go mod download)`
 
 ### Build the provider:
@@ -81,6 +81,5 @@ The following configuration points are available for the `xyz` provider:
 ## Reference
 
 For detailed reference documentation, please visit [the API docs][1].
-
 
 [1]: https://www.pulumi.com/docs/reference/pkg/x/
