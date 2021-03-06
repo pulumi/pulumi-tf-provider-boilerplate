@@ -1,10 +1,9 @@
-PROJECT_NAME := xyz Package
-
 PACK             := xyz
 ORG              := pulumi
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
 NODE_MODULE_NAME := @pulumi/${PACK}
 TF_NAME          := ${PACK}
+TF_REPO          := github.com/terraform-providers/${PACK}
 PROVIDER_PATH    := provider
 VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
 
@@ -20,25 +19,28 @@ OS := $(shell uname)
 EMPTY_TO_AVOID_SED := ""
 
 prepare::
-	@if test -z "${NAME}"; then echo "NAME not set"; exit 1; fi
-	@if test -z "${REPOSITORY}"; then echo "REPOSITORY not set"; exit 1; fi
+	@if test -z "${PACK}"; then echo "PACK not set"; exit 1; fi
+	@if test -z "${PROJECT}"; then echo "PROJECT not set"; exit 1; fi
 	@if test ! -d "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz"; then "Project already prepared"; exit 1; fi
 
-	mv "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-tfgen-${NAME}
-	mv "provider/cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-resource-${NAME}
+	GO111MODULE=on go get github.com/pulumi/pulumi-terraform@master
+	(cd provider && go get ${TF_REPO})
+	(cd provider && go mod download)
+
+	mv "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-tfgen-${PACK}
+	mv "provider/cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-resource-${PACK}
 
 	if [[ "${OS}" != "Darwin" ]]; then \
-		sed -i 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' provider/go.mod; \
-		find ./ ! -path './.git/*' -type f -exec sed -i 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
+		sed -i 's,github.com/terraform-providers/terraform-provider-xyz/xyz,${TF_REPO}/${TF_NAME},g' provider/resources.go \
+		find ./ ! -path './.git/*' -type f -exec sed -i 's,github.com/pulumi/pulumi-xyz,${PROJECT},g' {} \; &> /dev/null; \
+		find ./ ! -path './.git/*' -type f -exec sed -i 's/xyz/${PACK}/g' {} \; &> /dev/null; \
 	fi
 
 	# In MacOS the -i parameter needs an empty string to execute in place.
 	if [[ "${OS}" == "Darwin" ]]; then \
-		sed -i '' 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' provider/go.mod; \
-		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
-
-		sed -i '' 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' provider/resources.go; \
-		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
+		sed -i '' 's,github.com/terraform-providers/terraform-provider-xyz/xyz,${TF_REPO}/${TF_NAME},g' provider/resources.go \
+		find ./ ! -path './.git/*' -type f -exec sed -i '' 's,github.com/pulumi/pulumi-xyz,${PROJECT},g' {} \; &> /dev/null; \
+		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/xyz/${PACK}/g' {} \; &> /dev/null; \
 	fi
 
 .PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python cleanup
