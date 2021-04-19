@@ -1,5 +1,5 @@
 module github.com/pulumi/pulumi-xyz/sdk
 
-go 1.16
+go 1.14
 
-require github.com/pulumi/pulumi/sdk/v2 v2.23.2
+require github.com/pulumi/pulumi/sdk/v3 v3.0.0
