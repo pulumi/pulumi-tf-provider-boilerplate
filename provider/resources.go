@@ -19,10 +19,10 @@ import (
 	"path/filepath"
 	"unicode"
 
-	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
+	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 	"github.com/terraform-providers/terraform-provider-xyz/xyz"
@@ -30,10 +30,11 @@ import (
 
 // all of the token components used below.
 const (
-	// packages:
+	// This variable controls the default name of the package in the package
+	// registries for nodejs and python:
 	mainPkg = "xyz"
 	// modules:
-	mainMod = "index" // the y module
+	mainMod = "index" // the xyz module
 )
 
 // makeMember manufactures a type token for the package and the given module and type.
@@ -162,8 +163,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		CSharp: &tfbridge.CSharpInfo{
 			PackageReferences: map[string]string{
-				"Pulumi":                       "3.*",
-				"System.Collections.Immutable": "1.6.0",
+				"Pulumi": "3.*",
 			},
 		},
 	}

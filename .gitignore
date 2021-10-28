@@ -11,3 +11,5 @@ sdk/nodejs/node_modules
 *.iml
 
 yarn.lock
+.DS_Store
+README-BOILERPLATE.md
