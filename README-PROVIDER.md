@@ -53,4 +53,4 @@ The following configuration points are available for the `foo` provider:
 
 ## Reference
 
-For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/xyz/api-docs/).
+For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/foo/api-docs/).

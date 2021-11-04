@@ -10,7 +10,15 @@ The following instructions assume a Pulumi-owned provider based on an upstream p
 
 ### Prerequisites
 
-Ensure [`pulumictl`](https://github.com/pulumi/pulumictl#installation) is installed.
+Ensure the following tools are installed and present in your `$PATH`:
+
+* [`pulumictl`](https://github.com/pulumi/pulumictl#installation)
+* [Go 1.16](https://golang.org/dl/) or 1.latest
+* [NodeJS](https://nodejs.org/en/) 14.x.  We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage NodeJS installations.
+* [Yarn](https://yarnpkg.com/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Python](https://www.python.org/downloads/) (called as `python3`).  For recent versions of MacOS, the system-installed version is fine.
+* [.NET](https://dotnet.microsoft.com/download)
 
 ### Creating and Initializing the Repository
 
@@ -18,19 +26,13 @@ Pulumi offers this repository as a [GitHub template repository](https://docs.git
 
 1. Click "Use this template".
 1. Set the following options:
-    - Owner: pulumi (or your GitHub organization/username)
-    - Repository name: pulumi-foo
-    - Description: Pulumi provider for Foo
-    - Repository type: Public
+    * Owner: pulumi (or your GitHub organization/username)
+    * Repository name: pulumi-foo
+    * Description: Pulumi provider for Foo
+    * Repository type: Public
 1. Clone the generated repository to the appropriate location in your `$GOPATH`.
 
 From the templated repository:
-
-1. Create a branch on which to do this work:
-
-    ```bash
-    git checkout -b initial-scaffold
-    ```
 
 1. Run the following command to update files to use the name of your provider:
 
@@ -39,20 +41,19 @@ From the templated repository:
     ```
 
 1. Modify `README-PROVIDER.md` to include the following (we'll rename it to `README.md` toward the end of this guide):
-    - Any desired build status badges.
-    - An introductory paragraph describing the type of resources the provider manages, e.g. "The Foo provider for Pulumi manages resources for [Foo](http://example.com/).
-    - In the "Installing" section, correct package names for the various SDK libraries in the languages Pulumi supports.
-    - In the "Concepts" section, any important documentation of concepts (e.g. the ["serverless" components in the AWS provider](https://github.com/pulumi/pulumi-aws#serverless-functions)).
-    - In the "Configuration" section, any configurable options for the provider.  These may include, but are not limited to, environment variables or options that can be set via [`pulumi config set`](https://www.pulumi.com/docs/reference/cli/pulumi_config_set/).
-    - In the "Reference" section, provide a link to the to-be-published documentation.
+    * Any desired build status badges.
+    * An introductory paragraph describing the type of resources the provider manages, e.g. "The Foo provider for Pulumi manages resources for [Foo](http://example.com/).
+    * In the "Installing" section, correct package names for the various SDK libraries in the languages Pulumi supports.
+    * In the "Configuration" section, any configurable options for the provider.  These may include, but are not limited to, environment variables or options that can be set via [`pulumi config set`](https://www.pulumi.com/docs/reference/cli/pulumi_config_set/).
+    * In the "Reference" section, provide a link to the to-be-published documentation.
 
 ### Composing the Provider Code - Prerequisites
 
 Pulumi provider repositories have the following general structure:
 
-- `examples/` contains sample code which may optionally be included as integration tests to be run as part of a CI/CD pipeline.
-- `provider/` contains the Go code used to create the provider as well as generate the SDKs in the various languages that Pulumi supports.
-- `sdk/` contains the generated SDK code for each of the language platforms that Pulumi supports, with each supported platform in a separate subfolder.
+* `examples/` contains sample code which may optionally be included as integration tests to be run as part of a CI/CD pipeline.
+* `provider/` contains the Go code used to create the provider as well as generate the SDKs in the various languages that Pulumi supports.
+* `sdk/` contains the generated SDK code for each of the language platforms that Pulumi supports, with each supported platform in a separate subfolder.
 
 1. In `provider/go.mod`, add a reference to the upstream Terraform provider in the `require` section, e.g.
 
@@ -110,7 +111,7 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
     "foo_something_else": {Tok: makeDataSource(mainMod, "getSomethingElse")},
     ```
 
-1. **Add documentation mapping (sometimes needed):**  If the upstream provider's repo is not a part of the `terraform-providers` GitHub organization, specify the `GitHubOrg` property of `tfbridge.ProviderInfo` to ensure that documentation is picked up by the codegen process, e.g.:
+1. **Add documentation mapping (sometimes needed):**  If the upstream provider's repo is not a part of the `terraform-providers` GitHub organization, specify the `GitHubOrg` property of `tfbridge.ProviderInfo` to ensure that documentation is picked up by the codegen process, and that attribution for the upstream provider is correct, e.g.:
 
     ```go
     GitHubOrg: "foo",
@@ -149,6 +150,14 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
     make build_sdks
     ```
 
+1. Ensure the SDK is a proper go module:
+
+    ```bash
+    cd sdk && go mod tidy && popd
+    ```
+
+    This will pull in the correct dependencies in `sdk/go.mod` as well as setting the dependency tree in `sdk/go.sum`.
+
 1. Finally, ensure the provider code conforms to Go standards:
 
     ```bash
@@ -164,10 +173,10 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
 In this section, we will create a Pulumi program in TypeScript that utilizes the provider we created to ensure everything is working properly.
 
 1. Create an account with the provider's service and generate any necessary credentials, e.g. API keys:
-    - Email: bot@pulumi.com
-    - Password: (Create a random password in 1Password with the  maximum length and complexity allowed by the provider.)
-    - Ensure all secrets (passwords, generated API keys) are stored in Pulumi's 1Password vault.
-    - Enter any secrets consumed by integration tests as repository-level secrets in GitHub.  These will be used by the integration tests during the CI/CD process.
+    * Email: bot@pulumi.com
+    * Password: (Create a random password in 1Password with the  maximum length and complexity allowed by the provider.)
+    * Ensure all secrets (passwords, generated API keys) are stored in Pulumi's 1Password vault.
+    * Enter any secrets consumed by integration tests as repository-level secrets in GitHub.  These will be used by the integration tests during the CI/CD process.
 1. Generate GitHub workflows per [the instructions in the ci-cmgmt repository](https://github.com/pulumi/ci-mgmt/#readme) and copy to `.github/` in this repository.
 1. Copy the binary generated by the build and place it in your `$PATH` (`$GOPATH/bin` is a convenient choice), e.g.:
 
@@ -222,15 +231,8 @@ In this section, we'll add the necessary configuration to work with GitHub Actio
 
 ## Final Steps
 
-1. Replace this file with the README for the provider and create a PR to merge the changes:
+1. Replace this file with the README for the provider and push your changes:
 
     ```bash
-    mv README README-BIOLERPLATE.md # README-BOILERPLATE.md is .gitignored by default.
     mv README-PROVIDER.md README.md
-    ```
-
-1. Finally, push your changes and create a pull request:
-
-    ```bash
-    git add -A && git commit -m "Initial scaffold." && git push
     ```
