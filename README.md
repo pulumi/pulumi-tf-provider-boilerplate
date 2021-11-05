@@ -88,7 +88,7 @@ Pulumi provider repositories have the following general structure:
     warning: data source foo_something_else not found in provider map; skipping
     ```
 
-## Adding Mappings, Building the Provder and SDKs
+## Adding Mappings, Building the Provider and SDKs
 
 In this section we will add the mappings that allow the interoperation between the Pulumi provider and the Terraform provider.  Terraform resources map to an identically named concept in Pulumi.  Terraform data sources map to plain old functions in your supported programming language of choice.  Pulumi also allows provider functions and resources to be grouped into _namespaces_ to improve the cohesion of a provider's code, thereby making it easier for developers to use.  If your provider has a large number of resources, consider using namespaces to improve usability.
 
