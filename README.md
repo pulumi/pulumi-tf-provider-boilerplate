@@ -46,6 +46,7 @@ From the templated repository:
     * In the "Installing" section, correct package names for the various SDK libraries in the languages Pulumi supports.
     * In the "Configuration" section, any configurable options for the provider.  These may include, but are not limited to, environment variables or options that can be set via [`pulumi config set`](https://www.pulumi.com/docs/reference/cli/pulumi_config_set/).
     * In the "Reference" section, provide a link to the to-be-published documentation.
+    * Feel free to refer to [the Pulumi AWS provider README](https://github.com/pulumi/pulumi-aws) as an example.
 
 ### Composing the Provider Code - Prerequisites
 
@@ -70,7 +71,7 @@ Pulumi provider repositories have the following general structure:
 1. Download the dependencies:
 
     ```bash
-    cd provider && go mod tidy && popd
+    cd provider && go mod tidy && cd -
     ```
 
 1. Validate the schema by running the following command:
@@ -104,20 +105,21 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
     "foo_something_else": {Tok: makeResource(mainMod, "SomethingElse")},
     ```
 
-1. **Add data source mappings:** For each data source in the provider, add an entry in the `DataSources` property of the `tfbridge.ProviderInfo`, e.g.:
+2. **Add data source mappings:** For each data source in the provider, add an entry in the `DataSources` property of the `tfbridge.ProviderInfo`, e.g.:
 
     ```go
+    // Note the 'get' prefix for data sources
     "foo_something":      {Tok: makeDataSource(mainMod, "getSomething")},
     "foo_something_else": {Tok: makeDataSource(mainMod, "getSomethingElse")},
     ```
 
-1. **Add documentation mapping (sometimes needed):**  If the upstream provider's repo is not a part of the `terraform-providers` GitHub organization, specify the `GitHubOrg` property of `tfbridge.ProviderInfo` to ensure that documentation is picked up by the codegen process, and that attribution for the upstream provider is correct, e.g.:
+4. **Add documentation mapping (sometimes needed):**  If the upstream provider's repo is not a part of the `terraform-providers` GitHub organization, specify the `GitHubOrg` property of `tfbridge.ProviderInfo` to ensure that documentation is picked up by the codegen process, and that attribution for the upstream provider is correct, e.g.:
 
     ```go
     GitHubOrg: "foo",
     ```
 
-1. **Add provider configuration overrides (not typically needed):** Pulumi's Terraform bridge automatically detects configuration options for the upstream provider.  However, in rare cases these settings may need to be overrideen, e.g. if we want to change an environment variable default from `API_KEY` to `FOO_API_KEY`.  Examples of common uses cases:
+5. **Add provider configuration overrides (not typically needed):** Pulumi's Terraform bridge automatically detects configuration options for the upstream provider.  However, in rare cases these settings may need to be overridden, e.g. if we want to change an environment variable default from `API_KEY` to `FOO_API_KEY`.  Examples of common uses cases:
 
     ```go
     "additional_required_parameter": {},
@@ -129,36 +131,36 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
         Default: &tfbridge.DefaultInfo{
             Value: true,
         },
-    // Reanmed environment variables can be accounted for like so:
+    // Renamed environment variables can be accounted for like so:
     "apikey": {
         Default: &tfbridge.DefaultInfo{
             EnvVars: []string{"FOO_API_KEY"},
         },
     ```
 
-1. Build the provider and ensure there are no warnings about unmapped resources and no warnings about unmaped data sources:
+6. Build the provider and ensure there are no warnings about unmapped resources and no warnings about unmapped data sources:
 
     ```bash
     make provider
     ```
 
-    You may see warnings about documentation and examples.  These can be safely ignored for now.  Pulumi will add additional documentation on mapping docs in a future revision of this guide.
+    You may see warnings about documentation and examples, including "unexpected code snippets".  These can be safely ignored for now.  Pulumi will add additional documentation on mapping docs in a future revision of this guide.
 
-1. Build the SDKs in the various languages Pulumi supports:
+7. Build the SDKs in the various languages Pulumi supports:
 
     ```bash
     make build_sdks
     ```
 
-1. Ensure the SDK is a proper go module:
+8. Ensure the Golang SDK is a proper go module:
 
     ```bash
-    cd sdk && go mod tidy && popd
+    cd sdk && go mod tidy && cd -
     ```
 
     This will pull in the correct dependencies in `sdk/go.mod` as well as setting the dependency tree in `sdk/go.sum`.
 
-1. Finally, ensure the provider code conforms to Go standards:
+9. Finally, ensure the provider code conforms to Go standards:
 
     ```bash
     make lint_provider
@@ -201,10 +203,10 @@ In this section, we will create a Pulumi program in TypeScript that utilizes the
     yarn link @pulumi/foo
     ```
 
-1. Create a minmal program for the provider, i.e. one that creates the smallest-footprint resource.  Place this code in `index.ts`.
-1. Configure any necessary environmental variables and ensure the program runs successfully via `pulumi up`.
+1. Create a minimal program for the provider, i.e. one that creates the smallest-footprint resource.  Place this code in `index.ts`.
+1. Configure any necessary environment variables and ensure the program runs successfully via `pulumi up`.
 1. Once the program completes successfully, verify the resource was created in the provider's UI.
-1. Destroy any resources created by the progam via `pulumi destroy`.
+1. Destroy any resources created by the program via `pulumi destroy`.
 
 Optionally, you may create additional examples for SDKs in other languages supported by Pulumi.
 
@@ -226,7 +228,7 @@ In this section, we'll add the necessary configuration to work with GitHub Actio
     }
     ```
 
-    Add a similar function for each example that you want to run in an integration tests.  For examples written in other languages, create similar files for `examples_${LANGUAGE}_test.go`.
+    Add a similar function for each example that you want to run in an integration test.  For examples written in other languages, create similar files for `examples_${LANGUAGE}_test.go`.
 1. Ensure that any required secrets (API keys, etc.) are present in GitHub.
 
 ## Final Steps
