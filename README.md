@@ -105,7 +105,7 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
     "foo_something_else": {Tok: makeResource(mainMod, "SomethingElse")},
     ```
 
-2. **Add data source mappings:** For each data source in the provider, add an entry in the `DataSources` property of the `tfbridge.ProviderInfo`, e.g.:
+1. **Add data source mappings:** For each data source in the provider, add an entry in the `DataSources` property of the `tfbridge.ProviderInfo`, e.g.:
 
     ```go
     // Note the 'get' prefix for data sources
@@ -113,13 +113,13 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
     "foo_something_else": {Tok: makeDataSource(mainMod, "getSomethingElse")},
     ```
 
-4. **Add documentation mapping (sometimes needed):**  If the upstream provider's repo is not a part of the `terraform-providers` GitHub organization, specify the `GitHubOrg` property of `tfbridge.ProviderInfo` to ensure that documentation is picked up by the codegen process, and that attribution for the upstream provider is correct, e.g.:
+1. **Add documentation mapping (sometimes needed):**  If the upstream provider's repo is not a part of the `terraform-providers` GitHub organization, specify the `GitHubOrg` property of `tfbridge.ProviderInfo` to ensure that documentation is picked up by the codegen process, and that attribution for the upstream provider is correct, e.g.:
 
     ```go
     GitHubOrg: "foo",
     ```
 
-5. **Add provider configuration overrides (not typically needed):** Pulumi's Terraform bridge automatically detects configuration options for the upstream provider.  However, in rare cases these settings may need to be overridden, e.g. if we want to change an environment variable default from `API_KEY` to `FOO_API_KEY`.  Examples of common uses cases:
+1. **Add provider configuration overrides (not typically needed):** Pulumi's Terraform bridge automatically detects configuration options for the upstream provider.  However, in rare cases these settings may need to be overridden, e.g. if we want to change an environment variable default from `API_KEY` to `FOO_API_KEY`.  Examples of common uses cases:
 
     ```go
     "additional_required_parameter": {},
@@ -138,7 +138,7 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
         },
     ```
 
-6. Build the provider and ensure there are no warnings about unmapped resources and no warnings about unmapped data sources:
+1. Build the provider and ensure there are no warnings about unmapped resources and no warnings about unmapped data sources:
 
     ```bash
     make provider
@@ -146,13 +146,13 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
 
     You may see warnings about documentation and examples, including "unexpected code snippets".  These can be safely ignored for now.  Pulumi will add additional documentation on mapping docs in a future revision of this guide.
 
-7. Build the SDKs in the various languages Pulumi supports:
+1. Build the SDKs in the various languages Pulumi supports:
 
     ```bash
     make build_sdks
     ```
 
-8. Ensure the Golang SDK is a proper go module:
+1. Ensure the Golang SDK is a proper go module:
 
     ```bash
     cd sdk && go mod tidy && cd -
@@ -160,7 +160,7 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
 
     This will pull in the correct dependencies in `sdk/go.mod` as well as setting the dependency tree in `sdk/go.sum`.
 
-9. Finally, ensure the provider code conforms to Go standards:
+1. Finally, ensure the provider code conforms to Go standards:
 
     ```bash
     make lint_provider
