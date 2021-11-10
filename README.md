@@ -104,24 +104,24 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
     "foo_something":      {Tok: makeResource(mainMod, "Something")},
     "foo_something_else": {Tok: makeResource(mainMod, "SomethingElse")},
     ```
+
 1. **Add CSharpName (if necessary):** Dotnet does not allow for fields named the same as the enclosing type, which sometimes results in errors during the dotnet SDK build.
-   If you see something like 
-   ```
-   error CS0542: 'ApiKey': member names cannot be the same as their enclosing type [/Users/guin/go/src/github.com/pulumi/pulumi-artifactory/sdk/dotnet/Pulumi.Artifactory.csproj]
-   ``` 
-   you'll want to give your Resource a CSharpName, which can have any value that makes sense:
+    If you see something like 
+    ```text
+    error CS0542: 'ApiKey': member names cannot be the same as their enclosing type [/Users/guin/go/src/github.com/pulumi/pulumi-artifactory/sdk/dotnet/Pulumi.Artifactory.csproj]
+    ``` 
+    you'll want to give your Resource a CSharpName, which can have any value that makes sense:
 
-      ```go
-      "foo_something_dotnet": {
-         Tok: makeResource(mainMod, "SomethingDotnet"),
-         Fields: map[string]*tfbridge.SchemaInfo{
+    ```go
+    "foo_something_dotnet": {
+        Tok: makeResource(mainMod, "SomethingDotnet"),
+        Fields: map[string]*tfbridge.SchemaInfo{
             "something_dotnet": {
-               CSharpName: "SpecialName",
-             },
-         },
-      },
-
-      ```
+                CSharpName: "SpecialName",
+            },
+        },
+    },
+    ```
    
    [See the underlying terraform-bridge code here.](https://github.com/pulumi/pulumi-terraform-bridge/blob/master/pkg/tfbridge/info.go#L168)
 1. **Add data source mappings:** For each data source in the provider, add an entry in the `DataSources` property of the `tfbridge.ProviderInfo`, e.g.:
