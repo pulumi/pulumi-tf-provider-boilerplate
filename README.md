@@ -272,7 +272,7 @@ In this section, we'll add the necessary configuration to work with GitHub Actio
     mv README-PROVIDER.md README.md
     ```
 
-1. The final build step in your Action, "Publish SDKs", may fail the first time.
+1. If publishing the npm package fails during the "Publish SKDs" Action, perform the following steps:
     1. Go to [NPM Packages](https://www.npmjs.com/) and sign in as pulumi-bot.
     1. Click on the bot's profile pic and navigate to "Packages".
     1. On the left, under "Organizations, click on the Pulumi organization.
