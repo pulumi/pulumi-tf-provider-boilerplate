@@ -217,8 +217,8 @@ Optionally, you may create additional examples for SDKs in other languages suppo
     cd examples/my-example/py
     pulumi new python
     # (Go through the prompts with the default values)
-    pip3 install pulumi_foo
-    # TODO: clarify how to link the dependency
+    source venv/bin/activate # use the virtual Python env that Pulumi sets up for you
+    pip install pulumi_foo
     ```
 
 1. Follow the steps above to verify the program runs successfully.
