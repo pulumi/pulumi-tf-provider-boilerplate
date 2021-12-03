@@ -101,8 +101,8 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
     // Most providers will have all resources (and data sources) in the main module.
     // Note the mapping from snake_case HCL naming conventions to UpperCamelCase Pulumi SDK naming conventions.
     // The name of the provider is omitted from the mapped name due to the presence of namespaces in all supported Pulumi languages.
-    "foo_something":      {Tok: makeResource(mainMod, "Something")},
-    "foo_something_else": {Tok: makeResource(mainMod, "SomethingElse")},
+    "foo_something":      {Tok: tfbridge.MakeResource(mainMod, "Something")},
+    "foo_something_else": {Tok: tfbridge.MakeResource(mainMod, "SomethingElse")},
     ```
 
 1. **Add CSharpName (if necessary):** Dotnet does not allow for fields named the same as the enclosing type, which sometimes results in errors during the dotnet SDK build.

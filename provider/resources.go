@@ -17,14 +17,12 @@ package xyz
 import (
 	"fmt"
 	"path/filepath"
-	"unicode"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 	"github.com/terraform-providers/terraform-provider-xyz/xyz"
 )
 
@@ -37,46 +35,6 @@ const (
 	mainMod = "index" // the xyz module
 )
 
-// makeMember manufactures a type token for the package and the given module and type.
-func makeMember(mod string, mem string) tokens.ModuleMember {
-	return tokens.ModuleMember(mainPkg + ":" + mod + ":" + mem)
-}
-
-// makeType manufactures a type token for the package and the given module and type.
-func makeType(mod string, typ string) tokens.Type {
-	return tokens.Type(makeMember(mod, typ))
-}
-
-// makeDataSource manufactures a standard resource token given a module and resource name.  It
-// automatically uses the main package and names the file by simply lower casing the data source's
-// first character.
-func makeDataSource(mod string, res string) tokens.ModuleMember {
-	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
-	return makeMember(mod+"/"+fn, res)
-}
-
-// makeResource manufactures a standard resource token given a module and resource name.  It
-// automatically uses the main package and names the file by simply lower casing the resource's
-// first character.
-func makeResource(mod string, res string) tokens.Type {
-	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
-	return makeType(mod+"/"+fn, res)
-}
-
-// boolRef returns a reference to the bool argument.
-func boolRef(b bool) *bool {
-	return &b
-}
-
-// stringValue gets a string value from a property map if present, else ""
-func stringValue(vars resource.PropertyMap, prop resource.PropertyKey) string {
-	val, ok := vars[prop]
-	if ok && val.IsString() {
-		return val.StringValue()
-	}
-	return ""
-}
-
 // preConfigureCallback is called before the providerConfigure function of the underlying provider.
 // It should validate that the provider can be configured, and provide actionable errors in the case
 // it cannot be. Configuration variables can be read from `vars` using the `stringValue` function -
@@ -84,9 +42,6 @@ func stringValue(vars resource.PropertyMap, prop resource.PropertyKey) string {
 func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) error {
 	return nil
 }
-
-// managedByPulumi is a default used for some managed resources, in the absence of something more meaningful.
-var managedByPulumi = &tfbridge.DefaultInfo{Value: "Managed by Pulumi"}
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
@@ -106,7 +61,7 @@ func Provider() tfbridge.ProviderInfo {
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
 			// "region": {
-			// 	Type: makeType("region", "Region"),
+			// 	Type: tfbridge.MakeType("region", "Region"),
 			// 	Default: &tfbridge.DefaultInfo{
 			// 		EnvVars: []string{"AWS_REGION", "AWS_DEFAULT_REGION"},
 			// 	},
@@ -118,19 +73,19 @@ func Provider() tfbridge.ProviderInfo {
 			// are below - the single line form is the common case. The multi-line form is
 			// needed only if you wish to override types or other default options.
 			//
-			// "aws_iam_role": {Tok: makeResource(mainMod, "IamRole")}
+			// "aws_iam_role": {Tok: tfbridge.MakeResource(mainMod, "IamRole")}
 			//
 			// "aws_acm_certificate": {
-			// 	Tok: makeResource(mainMod, "Certificate"),
+			// 	Tok: tfbridge.MakeResource(mainMod, "Certificate"),
 			// 	Fields: map[string]*tfbridge.SchemaInfo{
-			// 		"tags": {Type: makeType(mainPkg, "Tags")},
+			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
 			// 	},
 			// },
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi function. An example
 			// is below.
-			// "aws_ami": {Tok: makeDataSource(mainMod, "getAmi")},
+			// "aws_ami": {Tok: tfbridge.MakeDataSource(mainMod, "getAmi")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// List any npm dependencies and their versions
