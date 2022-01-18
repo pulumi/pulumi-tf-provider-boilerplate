@@ -53,15 +53,20 @@ func Provider() tfbridge.ProviderInfo {
 		P:           p,
 		Name:        "xyz",
 		DisplayName: "",
+		// The default publisher for all packages is Pulumi.
+		// Change this to your personal name (or a company name) that you
+		// would like to be shown in the Pulumi Registry if this package is published
+		// there.
+		Publisher: "Pulumi",
 		// LogoURL is optional but useful to help identify your package in the Pulumi Registry
-		// if you choose to publish it there.
+		// if this package is published there.
 		//
 		// You may host a logo on a domain you control or add an SVG logo for your package
 		// in your repository and use the raw content URL for that file as your logo URL.
 		LogoURL:     "",
 		Description: "A Pulumi package for creating and managing xyz cloud resources.",
-		// category/ tag helps with categorizing the package in the Pulumi Registry.
-		// For available categories, see `Keywords` in
+		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
+		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
 		Keywords:   []string{"pulumi", "xyz", "category/cloud"},
 		License:    "Apache-2.0",
