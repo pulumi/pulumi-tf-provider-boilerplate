@@ -30,7 +30,7 @@ Pulumi offers this repository as a [GitHub template repository](https://docs.git
     * Repository name: pulumi-foo
     * Description: Pulumi provider for Foo
     * Repository type: Public
-1. Clone the generated repository to the appropriate location in your `$GOPATH`.
+1. Clone the generated repository.
 
 From the templated repository:
 
@@ -101,8 +101,8 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
     // Most providers will have all resources (and data sources) in the main module.
     // Note the mapping from snake_case HCL naming conventions to UpperCamelCase Pulumi SDK naming conventions.
     // The name of the provider is omitted from the mapped name due to the presence of namespaces in all supported Pulumi languages.
-    "foo_something":      {Tok: tfbridge.MakeResource(mainMod, "Something")},
-    "foo_something_else": {Tok: tfbridge.MakeResource(mainMod, "SomethingElse")},
+    "foo_something":      {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Something")},
+    "foo_something_else": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SomethingElse")},
     ```
 
 1. **Add CSharpName (if necessary):** Dotnet does not allow for fields named the same as the enclosing type, which sometimes results in errors during the dotnet SDK build.
@@ -114,7 +114,7 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
 
     ```go
     "foo_something_dotnet": {
-        Tok: makeResource(mainMod, "SomethingDotnet"),
+        Tok: tfbridge.MakeResource(mainPkg, mainMod, "SomethingDotnet"),
         Fields: map[string]*tfbridge.SchemaInfo{
             "something_dotnet": {
                 CSharpName: "SpecialName",
@@ -128,8 +128,8 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
 
     ```go
     // Note the 'get' prefix for data sources
-    "foo_something":      {Tok: makeDataSource(mainMod, "getSomething")},
-    "foo_something_else": {Tok: makeDataSource(mainMod, "getSomethingElse")},
+    "foo_something":      {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSomething")},
+    "foo_something_else": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSomethingElse")},
     ```
 
 1. **Add documentation mapping (sometimes needed):**  If the upstream provider's repo is not a part of the `terraform-providers` GitHub organization, specify the `GitHubOrg` property of `tfbridge.ProviderInfo` to ensure that documentation is picked up by the codegen process, and that attribution for the upstream provider is correct, e.g.:
