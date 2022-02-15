@@ -52,6 +52,8 @@ func Provider() tfbridge.ProviderInfo {
 	prov := tfbridge.ProviderInfo{
 		P:           p,
 		Name:        "xyz",
+		// DisplayName is a way to be able to change the casing of the provider
+		// name when being displayed on the Pulumi registry
 		DisplayName: "",
 		// The default publisher for all packages is Pulumi.
 		// Change this to your personal name (or a company name) that you
@@ -64,6 +66,10 @@ func Provider() tfbridge.ProviderInfo {
 		// You may host a logo on a domain you control or add an SVG logo for your package
 		// in your repository and use the raw content URL for that file as your logo URL.
 		LogoURL:     "",
+		// PluginDownloadURL is an optional URL used to download the Provider
+		// for use in Pulumi programs
+		// e.g https://github.com/org/pulumi-provider-name/releases/
+		PluginDownloadURL: "",
 		Description: "A Pulumi package for creating and managing xyz cloud resources.",
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
@@ -72,6 +78,8 @@ func Provider() tfbridge.ProviderInfo {
 		License:    "Apache-2.0",
 		Homepage:   "https://www.pulumi.com",
 		Repository: "https://github.com/pulumi/pulumi-xyz",
+		// The GitHub Org for the provider - defaults to `terraform-providers`
+		GitHubOrg: "",
 		Config:     map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
