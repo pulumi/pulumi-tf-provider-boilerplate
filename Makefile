@@ -1,5 +1,6 @@
 PROJECT_NAME := xyz Package
 
+SHELL            := /bin/bash
 PACK             := xyz
 ORG              := pulumi
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
