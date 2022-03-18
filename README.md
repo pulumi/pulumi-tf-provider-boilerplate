@@ -281,6 +281,8 @@ In this section, we'll add the necessary configuration to work with GitHub Actio
 
 1. Ensure that any required secrets are present as repository-level [secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) in GitHub.  These will be used by the integration tests during the CI/CD process.
 
+1. Repository settings: Toggle `Allow auto-merge` on in your provider repo to automate GitHub Actions workflow updates.
+
 ## Final Steps
 
 1. Ensure all required configurations (API keys, etc.) are documented in README-PROVIDER.md.
