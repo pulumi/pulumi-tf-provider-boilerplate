@@ -187,7 +187,7 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
 
     Fix any issues found by the linter.
 
-**Note:** If you make revisions to code in `resources.go`, you must re-run the `make tfgen` target to regenerate the schema.
+**Note:** If you make revisions to code in `resources.go`, you must re-run the `make tfgen` target to regenerate the schema.  Pulumi providers use Go 1.16, which does not have the ability to directly embed text files.  The `make tfgen` target will take the file `schema.json` and serialize it to a byte array so that it can be included in the build output.  (Go 1.17 will remove the need for this step.)
 
 ## Sample Program
 
