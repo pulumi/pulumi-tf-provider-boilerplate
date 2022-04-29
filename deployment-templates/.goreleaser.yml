@@ -1,0 +1,29 @@
+archives:
+  - id: archive
+    name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
+before:
+  hooks:
+    - make build_provider
+builds:
+  - binary: provider-xyz
+    dir: provider
+    env:
+      - CGO_ENABLED=0
+    goarch:
+      - amd64
+      - arm64
+    goos:
+      - darwin
+      - windows
+      - linux
+    ldflags:
+      # The linebelow MUST align with the module in current provider/go.mod
+      - -X github.com/your-org-name/pulumi-xyz/provider/pkg/version.Version={{.Tag }}
+    main: ./cmd/pulumi-resource-xyz/
+changelog:
+  skip: true
+release:
+  disable: false
+  prerelease: auto
+snapshot:
+  name_template: '{{ .Tag }}-SNAPSHOT'
