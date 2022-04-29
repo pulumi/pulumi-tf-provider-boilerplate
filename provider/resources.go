@@ -50,8 +50,8 @@ func Provider() tfbridge.ProviderInfo {
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
-		P:           p,
-		Name:        "xyz",
+		P:    p,
+		Name: "xyz",
 		// DisplayName is a way to be able to change the casing of the provider
 		// name when being displayed on the Pulumi registry
 		DisplayName: "",
@@ -65,12 +65,12 @@ func Provider() tfbridge.ProviderInfo {
 		//
 		// You may host a logo on a domain you control or add an SVG logo for your package
 		// in your repository and use the raw content URL for that file as your logo URL.
-		LogoURL:     "",
+		LogoURL: "",
 		// PluginDownloadURL is an optional URL used to download the Provider
 		// for use in Pulumi programs
 		// e.g https://github.com/org/pulumi-provider-name/releases/
 		PluginDownloadURL: "",
-		Description: "A Pulumi package for creating and managing xyz cloud resources.",
+		Description:       "A Pulumi package for creating and managing xyz cloud resources.",
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
@@ -80,7 +80,7 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/pulumi/pulumi-xyz",
 		// The GitHub Org for the provider - defaults to `terraform-providers`
 		GitHubOrg: "",
-		Config:     map[string]*tfbridge.SchemaInfo{
+		Config:    map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
 			// "region": {
@@ -96,10 +96,10 @@ func Provider() tfbridge.ProviderInfo {
 			// are below - the single line form is the common case. The multi-line form is
 			// needed only if you wish to override types or other default options.
 			//
-			// "aws_iam_role": {Tok: tfbridge.MakeResource(mainMod, "IamRole")}
+			// "aws_iam_role": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "IamRole")}
 			//
 			// "aws_acm_certificate": {
-			// 	Tok: tfbridge.MakeResource(mainMod, "Certificate"),
+			// 	Tok: tfbridge.MakeResource(mainPkg, mainMod, "Certificate"),
 			// 	Fields: map[string]*tfbridge.SchemaInfo{
 			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
 			// 	},
@@ -108,7 +108,7 @@ func Provider() tfbridge.ProviderInfo {
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi function. An example
 			// is below.
-			// "aws_ami": {Tok: tfbridge.MakeDataSource(mainMod, "getAmi")},
+			// "aws_ami": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAmi")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// List any npm dependencies and their versions
