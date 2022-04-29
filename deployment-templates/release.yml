@@ -50,7 +50,7 @@ jobs:
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v2
       with:
-        args: -p 1 release --rm-dist --timeout 90m0s
+        args: -p 3 release --rm-dist
         version: latest
     strategy:
       fail-fast: true
@@ -124,7 +124,7 @@ jobs:
         dotnetversion:
           - 3.1.301
         goversion:
-          - 1.16.x
+          - 1.17.x
         language:
           - nodejs
           - python
