@@ -27,7 +27,7 @@ Pulumi offers this repository as a [GitHub template repository](https://docs.git
 1. Click "Use this template".
 1. Set the following options:
     * Owner: pulumi (or your GitHub organization/username)
-    * Repository name: pulumi-foo
+    * Repository name: pulumi-foo (preface your provider with "pulumi" as standard practice)
     * Description: Pulumi provider for Foo
     * Repository type: Public
 1. Clone the generated repository.
@@ -39,8 +39,21 @@ From the templated repository:
     ```bash
     make prepare NAME=foo REPOSITORY=github.com/pulumi/pulumi-foo
     ```
+   
+   This will do the following:
+   - rename folders in `provider/cmd` to `pulumi-resource-foo` and `pulumi-tfgen-foo`
+   - replace dependencies in `provider/go.mod` to reflect your repository name
+   - find and replace all instances of the boilerplate `xyz` with the `NAME` of your provider.
 
-1. Modify `README-PROVIDER.md` to include the following (we'll rename it to `README.md` toward the end of this guide):
+   Note for third-party (non-pulumi organization) providers:
+   - Make sure to set the correct github organization/username in all files referencing your provider as a dependency:
+     - `examples/go.mod`
+     - `provider/resources.go`
+     - `sdk/go.mod`
+     - `provider/cmd/pulumi-resource-foo/main.go`
+     - `provider/cmd/pulumi-tfgen-foo/main.go`
+
+2. Modify `README-PROVIDER.md` to include the following (we'll rename it to `README.md` toward the end of this guide):
     * Any desired build status badges.
     * An introductory paragraph describing the type of resources the provider manages, e.g. "The Foo provider for Pulumi manages resources for [Foo](http://example.com/).
     * In the "Installing" section, correct package names for the various SDK libraries in the languages Pulumi supports.
@@ -54,6 +67,9 @@ Pulumi provider repositories have the following general structure:
 
 * `examples/` contains sample code which may optionally be included as integration tests to be run as part of a CI/CD pipeline.
 * `provider/` contains the Go code used to create the provider as well as generate the SDKs in the various languages that Pulumi supports.
+  * `provider/cmd/pulumi-tfgen-foo` contains the code to generate the Pulumi resource schema (`schema.json`), based on the Terraform provider's resources. 
+  * `provider/cmd/pulumi-resource-foo` contains the code to generate the code SDKs in all supported languages.
+  * `provider/pkg/resources.go` is the location where we will define the Terraform-to-Pulumi mappings for resources.
 * `sdk/` contains the generated SDK code for each of the language platforms that Pulumi supports, with each supported platform in a separate subfolder.
 
 1. In `provider/go.mod`, add a reference to the upstream Terraform provider in the `require` section, e.g.
@@ -74,7 +90,7 @@ Pulumi provider repositories have the following general structure:
     cd provider && go mod tidy && cd -
     ```
 
-1. Validate the schema by running the following command:
+1. Create the schema by running the following command:
 
     ```bash
     make tfgen
@@ -157,7 +173,7 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
         },
     ```
 
-1. Build the provider and ensure there are no warnings about unmapped resources and no warnings about unmapped data sources:
+1. Build the provider binary and ensure there are no warnings about unmapped resources and no warnings about unmapped data sources:
 
     ```bash
     make provider
@@ -187,7 +203,9 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
 
     Fix any issues found by the linter.
 
-**Note:** If you make revisions to code in `resources.go`, you must re-run the `make tfgen` target to regenerate the schema.  Pulumi providers use Go 1.16, which does not have the ability to directly embed text files.  The `make tfgen` target will take the file `schema.json` and serialize it to a byte array so that it can be included in the build output.  (Go 1.17 will remove the need for this step.)
+**Note:** If you make revisions to code in `resources.go`, you must re-run the `make tfgen` target to regenerate the schema.  
+Pulumi providers use Go 1.16, which does not have the ability to directly embed text files.  
+The `make tfgen` target will take the file `schema.json` and serialize it to a byte array so that it can be included in the build output.  (Go 1.17 will remove the need for this step.)
 
 ## Sample Program
 
