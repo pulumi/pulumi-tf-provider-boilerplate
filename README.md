@@ -2,13 +2,18 @@
 
 This repository contains boilerplate code for building a new Pulumi provider which wraps an existing Terraform provider.  
 
-The following instructions cover: 
-- providers maintained by Pulumi (denoted with a "Pulumi Official" checkmark on the Pulumi registry)
-- providers published and maintained by the Pulumi community, referred to as "third-party" providers.
+### Background
+This repository is part of the [guide for authoring and publishing a Pulumi Package](https://www.pulumi.com/docs/guides/pulumi-packages/how-to-author).
+
+Learn about the concepts behind [Pulumi Packages](https://www.pulumi.com/docs/guides/pulumi-packages/#pulumi-packages).
 
 ## Creating a Pulumi Terraform Bridge Provider
 
-The following instructions assume a Pulumi-owned provider based on an upstream provider named `terraform-provider-foo`.  Substitute appropriate values below for your use case.
+The following instructions cover:
+- providers maintained by Pulumi (denoted with a "Pulumi Official" checkmark on the Pulumi registry)
+- providers published and maintained by the Pulumi community, referred to as "third-party" providers
+
+We showcase a Pulumi-owned provider based on an upstream provider named `terraform-provider-foo`.  Substitute appropriate values below for your use case.
 
 > Note: If the name of the desired Pulumi provider differs from the name of the Terraform provider, you will need to carefully distinguish between the references - see <https://github.com/pulumi/pulumi-azure> for an example.
 
@@ -321,7 +326,7 @@ In this section, we'll add the necessary configuration to work with GitHub Actio
     mv README-PROVIDER.md README.md
     ```
 
-1. If publishing the npm package fails during the "Publish SKDs" Action, perform the following steps:
+1. If publishing the npm package fails during the "Publish SDKs" Action, perform the following steps:
     1. Go to [NPM Packages](https://www.npmjs.com/) and sign in as pulumi-bot.
     1. Click on the bot's profile pic and navigate to "Packages".
     1. On the left, under "Organizations, click on the Pulumi organization.
