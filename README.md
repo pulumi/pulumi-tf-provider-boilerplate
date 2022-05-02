@@ -1,6 +1,10 @@
 # Terraform Bridge Provider Boilerplate
 
-This repository contains boilerplate code for building a new Pulumi provider which wraps an existing Terraform provider.  These instructions are primarily intended for internal use by Pulumi as we have not yet refined the process for general consumption by the community at large, but this document may serve as a rough guide for community members who want to create their own Pulumi providers that wrap an existing Terraform provider.
+This repository contains boilerplate code for building a new Pulumi provider which wraps an existing Terraform provider.  
+
+The following instructions cover: 
+- providers maintained by Pulumi (denoted with a "Pulumi Official" checkmark on the Pulumi registry)
+- providers published and maintained by the Pulumi community, referred to as "third-party" providers.
 
 ## Creating a Pulumi Terraform Bridge Provider
 
@@ -26,15 +30,15 @@ Pulumi offers this repository as a [GitHub template repository](https://docs.git
 
 1. Click "Use this template".
 1. Set the following options:
-    * Owner: pulumi (or your GitHub organization/username)
-    * Repository name: pulumi-foo (preface your provider with "pulumi" as standard practice)
+    * Owner: pulumi (third-party: your GitHub organization/username)
+    * Repository name: pulumi-foo (third-party: preface your repo name with "pulumi" as standard practice)
     * Description: Pulumi provider for Foo
     * Repository type: Public
 1. Clone the generated repository.
 
 From the templated repository:
 
-1. Run the following command to update files to use the name of your provider:
+1. Run the following command to update files to use the name of your provider (third-party: use your GitHub organization/username):
 
     ```bash
     make prepare NAME=foo REPOSITORY=github.com/pulumi/pulumi-foo
@@ -45,7 +49,7 @@ From the templated repository:
    - replace dependencies in `provider/go.mod` to reflect your repository name
    - find and replace all instances of the boilerplate `xyz` with the `NAME` of your provider.
 
-   Note for third-party (non-pulumi organization) providers:
+   Note for third-party providers:
    - Make sure to set the correct GitHub organization/username in all files referencing your provider as a dependency:
      - `examples/go.mod`
      - `provider/resources.go`
