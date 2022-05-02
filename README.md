@@ -39,14 +39,14 @@ From the templated repository:
     ```bash
     make prepare NAME=foo REPOSITORY=github.com/pulumi/pulumi-foo
     ```
-   
+
    This will do the following:
    - rename folders in `provider/cmd` to `pulumi-resource-foo` and `pulumi-tfgen-foo`
    - replace dependencies in `provider/go.mod` to reflect your repository name
    - find and replace all instances of the boilerplate `xyz` with the `NAME` of your provider.
 
    Note for third-party (non-pulumi organization) providers:
-   - Make sure to set the correct github organization/username in all files referencing your provider as a dependency:
+   - Make sure to set the correct GitHub organization/username in all files referencing your provider as a dependency:
      - `examples/go.mod`
      - `provider/resources.go`
      - `sdk/go.mod`
@@ -67,8 +67,8 @@ Pulumi provider repositories have the following general structure:
 
 * `examples/` contains sample code which may optionally be included as integration tests to be run as part of a CI/CD pipeline.
 * `provider/` contains the Go code used to create the provider as well as generate the SDKs in the various languages that Pulumi supports.
-  * `provider/cmd/pulumi-tfgen-foo` contains the code to generate the Pulumi resource schema (`schema.json`), based on the Terraform provider's resources. 
-  * `provider/cmd/pulumi-resource-foo` contains the code to generate the code SDKs in all supported languages.
+  * `provider/cmd/pulumi-tfgen-foo` generates the Pulumi resource schema (`schema.json`), based on the Terraform provider's resources.
+  * `provider/cmd/pulumi-resource-foo` generates the SDKs in all supported languages from the schema, placing them in the `sdk/` folder.
   * `provider/pkg/resources.go` is the location where we will define the Terraform-to-Pulumi mappings for resources.
 * `sdk/` contains the generated SDK code for each of the language platforms that Pulumi supports, with each supported platform in a separate subfolder.
 
@@ -203,15 +203,15 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
 
     Fix any issues found by the linter.
 
-**Note:** If you make revisions to code in `resources.go`, you must re-run the `make tfgen` target to regenerate the schema.  
-Pulumi providers use Go 1.16, which does not have the ability to directly embed text files.  
-The `make tfgen` target will take the file `schema.json` and serialize it to a byte array so that it can be included in the build output.  (Go 1.17 will remove the need for this step.)
+**Note:** If you make revisions to code in `resources.go`, you must re-run the `make tfgen` target to regenerate the schema.
+The `make tfgen` target will take the file `schema.json` and serialize it to a byte array so that it can be included in the build output.
+(This is a holdover from Go 1.16, which does not have the ability to directly embed text files. We are working on removing the need for this step.)
 
 ## Sample Program
 
 In this section, we will create a Pulumi program in TypeScript that utilizes the provider we created to ensure everything is working properly.
 
-1. Create an account with the provider's service and generate any necessary credentials, e.g. API keys:
+1. Create an account with the provider's service and generate any necessary credentials, e.g. API keys.
     * Email: bot@pulumi.com
     * Password: (Create a random password in 1Password with the  maximum length and complexity allowed by the provider.)
     * Ensure all secrets (passwords, generated API keys) are stored in Pulumi's 1Password vault.
@@ -292,6 +292,12 @@ We can run integration tests on our examples using the `*_test.go` files in the 
     ```
 
 ## Configuring CI with GitHub Actions
+
+### Third-party providers
+
+1. Follow the instructions laid out in the [deployment templates](./deployment-templates/README-DEPLOYMENT.md).
+
+### Pulumi Internal
 
 In this section, we'll add the necessary configuration to work with GitHub Actions for Pulumi's standard CI/CD workflows for providers.
 
