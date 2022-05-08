@@ -29,7 +29,7 @@ env:
   PYPI_REPOSITORY_URL: ""
   PUBLISH_PYPI: true
 jobs:
-  publish-binary:
+  publish_binary:
     name: publish
     runs-on: ubuntu-latest
     steps:
