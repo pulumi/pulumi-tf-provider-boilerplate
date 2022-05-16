@@ -3,7 +3,7 @@ archives:
     name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
 before:
   hooks:
-    - make provider
+    - make tfgen
 builds:
   - binary: provider-resource-xyz
     dir: provider
