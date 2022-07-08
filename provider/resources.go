@@ -78,7 +78,8 @@ func Provider() tfbridge.ProviderInfo {
 		License:    "Apache-2.0",
 		Homepage:   "https://www.pulumi.com",
 		Repository: "https://github.com/pulumi/pulumi-xyz",
-		// The GitHub Org for the provider - defaults to `terraform-providers`
+		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
+		// should match the TF provider module's require directive, not any replace directives.
 		GitHubOrg: "",
 		Config:    map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
