@@ -1,23 +1,14 @@
 ARG UBUNTU_VERSION=latest
 FROM ubuntu:${UBUNTU_VERSION}
 
-# Update apt-get
-RUN apt-get update
-
-# Install curl
-RUN apt-get install -y curl
-
-# Install wget
-RUN apt-get install -y wget
-
-# Install xz extensions for tar
-RUN apt-get install -y xz-utils
-
-# Install make
-RUN apt-get install -y make
-
-# Install gcc
-RUN apt-get install -y gcc
+# Update apt-get and install various needed utilities
+RUN apt-get update && \
+    apt-get install -y curl && \
+    apt-get install -y wget && \
+    apt-get install -y xz-utils && \
+    apt-get install -y make && \
+    apt-get install -y gcc && \
+    apt-get install -y git
 
 # Install bridged provider prerequisites
 # See README.md
@@ -37,7 +28,6 @@ RUN mkdir -p $GOPATH/bin && \
     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.46.2
 
 ENV PATH=$PATH:$GOPATH/bin
-
 
 # Install pulumictl
 ARG PULUMICTL_VERSION=v0.0.32
