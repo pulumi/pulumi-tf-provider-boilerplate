@@ -131,10 +131,10 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
     ```
 
 1. **Add CSharpName (if necessary):** Dotnet does not allow for fields named the same as the enclosing type, which sometimes results in errors during the dotnet SDK build.
-    If you see something like 
+    If you see something like
     ```text
     error CS0542: 'ApiKey': member names cannot be the same as their enclosing type [/Users/guin/go/src/github.com/pulumi/pulumi-artifactory/sdk/dotnet/Pulumi.Artifactory.csproj]
-    ``` 
+    ```
     you'll want to give your Resource a CSharpName, which can have any value that makes sense:
 
     ```go
@@ -147,7 +147,7 @@ The following instructions all pertain to `provider/resources.go`, in the sectio
         },
     },
     ```
-   
+
    [See the underlying terraform-bridge code here.](https://github.com/pulumi/pulumi-terraform-bridge/blob/master/pkg/tfbridge/info.go#L168)
 1. **Add data source mappings:** For each data source in the provider, add an entry in the `DataSources` property of the `tfbridge.ProviderInfo`, e.g.:
 
@@ -334,3 +334,74 @@ In this section, we'll add the necessary configuration to work with GitHub Actio
     1. Under "Settings", set the Package Status to "public".
 
 Now you are ready to use the provider, cut releases, and have some well-deserved :ice_cream:!
+
+
+## Building the Provider Locally
+
+There are 2 ways the provider can be built locally:
+
+`make provider` will use the current operating system and architecture to create a binary that can be used on your PATH.
+
+To build the provider for another set of operating systems / architectures, the project uses [goreleaser](https://goreleaser.com/).
+Goreleaser, a CLI tool, that allows a user to build a matrix of binaries.
+
+Create a `.goreleaser.yml` file in the root of your project:
+```
+archives:
+- id: archive
+  name_template: "{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}"
+before:
+  hooks:
+  - make tfgen
+builds:
+- binary: pulumi-resource-xyz
+  dir: provider
+  goarch:
+  - amd64
+  - arm64
+  goos:
+  - darwin
+  - windows
+  - linux
+  ignore: []
+  ldflags:
+  - -X github.com/pulumi/pulumi-xyz/provider/pkg/version.Version={{.Tag}}
+  main: ./cmd/pulumi-resource-xyz/
+  sort: asc
+  use: git
+release:
+  disable: false
+snapshot:
+  name_template: "{{ .Tag }}-SNAPSHOT"
+```
+
+To build the provider for the combination of architectures and operating systems, you can run the following CLI command:
+
+```bash
+goreleaser build --rm-dist --skip-validate
+```
+
+That will ensure that a list of binaries are available to use:
+
+```
+▶ tree dist
+dist
+├── CHANGELOG.md
+├── artifacts.json
+├── config.yaml
+├── metadata.json
+├── pulumi-xyz_darwin_amd64_v1
+│   └── pulumi-resource-xyz
+├── pulumi-xyz_darwin_arm64
+│   └── pulumi-resource-xyz
+├── pulumi-xyz_linux_amd64_v1
+│   └── pulumi-resource-xyz
+├── pulumi-xyz_linux_arm64
+│   └── pulumi-resource-xyz
+├── pulumi-xyz_windows_amd64_v1
+│   └── pulumi-resource-xyz.exe
+└── pulumi-xyz_windows_arm64
+    └── pulumi-resource-xyz.exe
+```
+
+Any of the provider binaries can be used to target the correct machine architecture
