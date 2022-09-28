@@ -405,3 +405,48 @@ dist
 ```
 
 Any of the provider binaries can be used to target the correct machine architecture
+
+## The Shim Pattern
+
+If you receive the following error: `use of internal package github.com/example/terraform-provider-example/internal/provider not allowed`, you need to use
+the shim model below, and replace the example item:
+<!-- markdownlint-disable MD010 -->
+```bash
+
+mkdir -p provider/shim
+cat <<-EOF> provider/shim/go.mod
+module github.com/example/terraform-provider-example/shim
+
+go 1.18
+
+require github.com/hashicorp/terraform-plugin-sdk/v2 v2.22.0
+require github.com/example/terraform-provider-example v1.0.0
+
+EOF
+
+cat <<-EOF> provider/shim/shim.go
+package shim
+
+import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/example/terraform-provider-example/internal/provider"
+)
+
+// fix provider.Provider here to match whats in internal/provider
+func Provider() *schema.Provider {
+	return provider.Provider()
+}
+
+EOF
+
+cd provider/shim/ && go mod tidy && cd ../../
+
+cat <<EOF>> provider/go.mod
+replace github.com/example/terraform-provider-example/shim => ./shim
+require github.com/example/terraform-provider-example/shim v0.0.0
+EOF
+
+cd provider && go mod tidy
+
+```
+<!-- markdownlint-enable MD010 -->
