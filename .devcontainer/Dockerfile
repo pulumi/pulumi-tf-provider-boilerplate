@@ -54,14 +54,13 @@ RUN apt-get install -y python3 && \
     apt-get install -y python3-setuptools
 
 # Install .NET
-RUN wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
-    dpkg -i packages-microsoft-prod.deb && \
-    rm packages-microsoft-prod.deb
+# https://stackoverflow.com/questions/73753672/a-fatal-error-occurred-the-folder-usr-share-dotnet-host-fxr-does-not-exist
+RUN apt-get remove dotnet* && \
+    apt-get remove aspnetcore* && \
+    apt-get remove netstandard&
 
 RUN apt-get update && \
-    apt-get install -y apt-transport-https && \
-    apt-get update && \
-    apt-get install -y dotnet-sdk-6.0
+    apt-get install dotnet-sdk-6.0 -y
 
 # Install Pulumi
 RUN curl -fsSL https://get.pulumi.com | sh
