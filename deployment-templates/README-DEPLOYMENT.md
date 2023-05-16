@@ -10,11 +10,11 @@
 
 1. Add any needed tokens to the actions secrets for your repository or organization
 
-1. Customize the release.yml with the correct tokens using the format:  
+1. Customize the release.yml with the correct tokens using the format:
 
       `${{ secrets.MyTokenName }}`
 
-1. Customize .goreleaser.yml for your provider, paying special attention that the ldlflags are set to match your provider/go.mod exactly: 
+1. Customize .goreleaser.yml for your provider, paying special attention that the ldlflags are set to match your provider/go.mod exactly:
 
      `-X github.com/pulumi/pulumi-aws/provider/v5/pkg/version.Version={{.Tag}}`
 
@@ -26,3 +26,7 @@
 1. Push a tag to your repo in the format "v0.0.0" to initiate a release
 
 1. IMPORTANT: also add a tag in the format "sdk/v0.0.0" for the Go SDK
+
+# Upgrade
+
+Pulumi provides a [GitHub action](https://github.com/pulumi/pulumi-upgrade-provider-action) to automate upgrading your provider upon a new upstream version release. An example workflow that runs the upgrade action on a cron job, as well as whenever an issue is created with a title prefix of 'Upgrade terraform-provider', is [provided here](./upgrade-provider.yml).
