@@ -19,11 +19,14 @@ import (
 	"path/filepath"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/x"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/terraform-providers/terraform-provider-xyz/xyz"
+	// uncomment if using experimental token mapping (below)
+	// "github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
 // all of the token components used below.
@@ -146,6 +149,12 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 	}
+
+	// These are experimental API's that you may opt to use.
+	// For more information, please reference: https://github.com/pulumi/pulumi-terraform-bridge/pull/733
+	// err := x.ComputeDefaults(&prov, x.TokensSingleModule("xyz_", mainMod,
+	// 	x.MakeStandardToken(mainPkg)))
+	// contract.AssertNoErrorf(err, "Failed to compute defaults")
 
 	prov.SetAutonaming(255, "-")
 
