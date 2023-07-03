@@ -6,13 +6,8 @@
 
 1. Place the .goreleaser.yml from this directory at the root of your repo
 
-1. Obtain needed accounts and tokens from the language specific package managers you will use
-
-1. Add any needed tokens to the actions secrets for your repository or organization
-
-1. Customize the release.yml with the correct tokens using the format:
-
-      `${{ secrets.MyTokenName }}`
+1. The example shown uses Pulumi's [Publishing Action](https://github.com/pulumi/pulumi-package-publisher) to publish the language SDKS.
+   Refer to the README for any environment secrets you need to set up.
 
 1. Customize .goreleaser.yml for your provider, paying special attention that the ldlflags are set to match your provider/go.mod exactly:
 
