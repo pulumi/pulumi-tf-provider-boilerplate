@@ -151,11 +151,10 @@ func Provider() tfbridge.ProviderInfo {
 
 	// These are new API's that you may opt to use to automatically compute resource tokens,
 	// and apply auto aliasing for full backwards compatibility.
-	// For more information, please reference: https://github.com/pulumi/pulumi-terraform-bridge/pull/1232
-	// err := tfbridge.ComputeTokens(&prov, tfbridge.tokens.SingleModule("xyz_", mainMod,
-	// 	tfbridge.Tokens.MakeStandardToken(mainPkg)))
-	// contract.AssertNoErrorf(err, "Failed to compute defaults")
-
+	// For more information, please reference: https://pkg.go.dev/github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge#ProviderInfo.ComputeTokens
+	prov.MustComputeTokens(tokens.SingleModule("xyz_", mainMod,
+		tokens.MakeStandard(mainPkg)))
+	prov.MustApplyAutoAliasing()
 	prov.SetAutonaming(255, "-")
 
 	return prov
