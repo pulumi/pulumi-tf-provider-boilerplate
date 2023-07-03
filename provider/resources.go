@@ -24,8 +24,6 @@ import (
 	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/terraform-providers/terraform-provider-xyz/xyz"
-	// uncomment if using experimental token mapping (below)
-	// "github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
 // all of the token components used below.
