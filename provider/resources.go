@@ -19,7 +19,6 @@ import (
 	"path/filepath"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/x"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
@@ -150,10 +149,11 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
-	// These are experimental API's that you may opt to use.
-	// For more information, please reference: https://github.com/pulumi/pulumi-terraform-bridge/pull/733
-	// err := x.ComputeDefaults(&prov, x.TokensSingleModule("xyz_", mainMod,
-	// 	x.MakeStandardToken(mainPkg)))
+	// These are new API's that you may opt to use to automatically compute resource tokens,
+	// and apply auto aliasing for full backwards compatibility.
+	// For more information, please reference: https://github.com/pulumi/pulumi-terraform-bridge/pull/1232
+	// err := tfbridge.ComputeTokens(&prov, tfbridge.tokens.SingleModule("xyz_", mainMod,
+	// 	tfbridge.Tokens.MakeStandardToken(mainPkg)))
 	// contract.AssertNoErrorf(err, "Failed to compute defaults")
 
 	prov.SetAutonaming(255, "-")
