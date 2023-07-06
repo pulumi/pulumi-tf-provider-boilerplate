@@ -19,6 +19,7 @@ import (
 	"path/filepath"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
@@ -147,6 +148,12 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
+	// These are new API's that you may opt to use to automatically compute resource tokens,
+	// and apply auto aliasing for full backwards compatibility.
+	// For more information, please reference: https://pkg.go.dev/github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge#ProviderInfo.ComputeTokens
+	prov.MustComputeTokens(tokens.SingleModule("xyz_", mainMod,
+		tokens.MakeStandard(mainPkg)))
+	prov.MustApplyAutoAliasing()
 	prov.SetAutonaming(255, "-")
 
 	return prov

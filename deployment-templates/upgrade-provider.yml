@@ -1,0 +1,16 @@
+name: Upgrade provider
+on:
+  issues:
+    types:
+    - opened
+  schedule:
+    - cron: '0 5 * * *'
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  upgrade_provider:
+    name: upgrade-provider
+    runs-on: ubuntu-latest
+    steps:
+    - name: Call upgrade provider action
+      uses: pulumi/pulumi-upgrade-provider-action@main
