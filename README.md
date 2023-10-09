@@ -48,21 +48,19 @@ From the templated repository:
 1. Run the following command to update files to use the name of your provider (third-party: use your GitHub organization/username):
 
     ```bash
-    make prepare NAME=foo REPOSITORY=github.com/pulumi/pulumi-foo
+    make prepare NAME=foo REPOSITORY=github.com/pulumi/pulumi-foo ORG=myorg
     ```
 
    This will do the following:
    - rename folders in `provider/cmd` to `pulumi-resource-foo` and `pulumi-tfgen-foo`
    - replace dependencies in `provider/go.mod` to reflect your repository name
    - find and replace all instances of the boilerplate `xyz` with the `NAME` of your provider.
+   - find and replace all instances of the boilerplate `abc` with the `ORG` of your provider.
+   - replace all instances of the `github.com/pulumi/pulumi-xyz` repository with the `REPOSITORY` location
 
    Note for third-party providers:
-   - Make sure to set the correct GitHub organization/username in all files referencing your provider as a dependency:
-     - `examples/go.mod`
-     - `provider/resources.go`
-     - `sdk/go.mod`
-     - `provider/cmd/pulumi-resource-foo/main.go`
-     - `provider/cmd/pulumi-tfgen-foo/main.go`
+   - If you intend to publish on the Pulumi registry you will want to update the `DisplayName`, `Publisher`, and `Homepage` values in `provider/resources.go` to use your desired casing.
+
 
 2. Modify `README-PROVIDER.md` to include the following (we'll rename it to `README.md` toward the end of this guide):
     - Any desired build status badges.
