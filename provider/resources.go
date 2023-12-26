@@ -18,12 +18,17 @@ import (
 	"fmt"
 	"path"
 
+	// Allow embedding bridge-metadata.json in the provider.
+	_ "embed"
+
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/terraform-providers/terraform-provider-xyz/xyz"
+
+	// Replace this provider with the provider you are bridging.
+	xyz "github.com/iwahbe/terraform-provider-xyz/provider"
 
 	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
 )
@@ -44,6 +49,9 @@ const (
 func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) error {
 	return nil
 }
+
+//go:embed cmd/pulumi-resource-xyz/bridge-metadata.json
+var metadata []byte
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
@@ -80,8 +88,9 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/pulumi/pulumi-xyz",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
-		GitHubOrg: "",
-		Config:    map[string]*tfbridge.SchemaInfo{
+		GitHubOrg:    "",
+		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
+		Config:       map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
 			// "region": {
