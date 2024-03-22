@@ -60,6 +60,7 @@ func Provider() tfbridge.ProviderInfo {
 		// Instantiate the Terraform provider
 		P:    shimv2.NewProvider(xyz.New(version.Version)()),
 		Name: "xyz",
+		Version: version.Version,
 		// DisplayName is a way to be able to change the casing of the provider
 		// name when being displayed on the Pulumi registry
 		DisplayName: "",
