@@ -15,7 +15,6 @@
 package xyz
 
 import (
-	"fmt"
 	"path"
 
 	// Allow embedding bridge-metadata.json in the provider.
@@ -68,7 +67,7 @@ func Provider() tfbridge.ProviderInfo {
 		// Change this to your personal name (or a company name) that you
 		// would like to be shown in the Pulumi Registry if this package is published
 		// there.
-		Publisher: "Pulumi",
+		Publisher: "abc",
 		// LogoURL is optional but useful to help identify your package in the Pulumi Registry
 		// if this package is published there.
 		//
@@ -83,7 +82,7 @@ func Provider() tfbridge.ProviderInfo {
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{"pulumi", "xyz", "category/cloud"},
+		Keywords:   []string{"abc", "xyz", "category/cloud"},
 		License:    "Apache-2.0",
 		Homepage:   "https://www.pulumi.com",
 		Repository: "https://github.com/pulumi/pulumi-xyz",
@@ -143,7 +142,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: path.Join(
-				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", mainPkg),
+				"github.com/pulumi/pulumi-xyz/sdk/",
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				mainPkg,
