@@ -1,0 +1,114 @@
+{
+    "name": "xyz",
+    "description": "A Pulumi package for creating and managing xyz cloud resources.",
+    "keywords": [
+        "abc",
+        "xyz",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`xyz` Terraform Provider](https://github.com/terraform-providers/terraform-provider-xyz).",
+    "repository": "https://github.com/pulumi/pulumi-xyz",
+    "publisher": "abc",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20"
+        },
+        "go": {
+            "importBasePath": "github.com/pulumi/pulumi-xyz/sdk/go/xyz",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "nodejs": {
+            "packageDescription": "A Pulumi package for creating and managing xyz cloud resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-xyz)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-xyz` repo](https://github.com/pulumi/pulumi-xyz/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-xyz` repo](https://github.com/terraform-providers/terraform-provider-xyz/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-xyz)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-xyz` repo](https://github.com/pulumi/pulumi-xyz/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-xyz` repo](https://github.com/terraform-providers/terraform-provider-xyz/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {},
+    "provider": {
+        "description": "The provider type for the xyz package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n"
+    },
+    "resources": {
+        "xyz:index/resource:Resource": {
+            "properties": {
+                "sampleAttribute": {
+                    "type": "string",
+                    "description": "Sample attribute.\n"
+                }
+            },
+            "inputProperties": {
+                "sampleAttribute": {
+                    "type": "string",
+                    "description": "Sample attribute.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Resource resources.\n",
+                "properties": {
+                    "sampleAttribute": {
+                        "type": "string",
+                        "description": "Sample attribute.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "xyz:index/getDataSource:getDataSource": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getDataSource.\n",
+                "properties": {
+                    "sampleAttribute": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "sampleAttribute"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getDataSource.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "sampleAttribute": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "sampleAttribute",
+                    "id"
+                ]
+            }
+        }
+    }
+}
