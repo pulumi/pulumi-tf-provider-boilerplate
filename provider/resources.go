@@ -119,7 +119,7 @@ func Provider() tfbridge.ProviderInfo {
 		// LogoURL is optional but useful to help identify your package in the Pulumi Registry
 		// if this package is published there.
 		//
-		// You may host a logo on a domain you control or add an SVG logo for your package
+		// You may host a logo on a domain you control or add an PNG logo (100x100) for your package
 		// in your repository and use the raw content URL for that file as your logo URL.
 		LogoURL: "",
 		// PluginDownloadURL is an optional URL used to download the Provider

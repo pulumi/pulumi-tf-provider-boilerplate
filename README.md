@@ -24,9 +24,9 @@ We showcase a Pulumi-owned provider based on an upstream provider named `terrafo
 Ensure the following tools are installed and present in your `$PATH`:
 
 - [`pulumictl`](https://github.com/pulumi/pulumictl#installation)
-- [Go 1.17](https://golang.org/dl/) or 1.latest
+- [Go](https://golang.org/dl/) or 1.latest
 - [`golangci-lint`](https://golangci-lint.run/welcome/install/)
-- [NodeJS](https://nodejs.org/en/) 14.x.  We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage NodeJS installations.
+- [NodeJS](https://nodejs.org/en/) Active or maintenance version ([Node.js Releases](https://nodejs.org/en/about/previous-releases)).  We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage NodeJS installations.
 - [Yarn](https://yarnpkg.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Python](https://www.python.org/downloads/) (called as `python3`).  For recent versions of MacOS, the system-installed version is fine.
@@ -116,6 +116,9 @@ Pulumi provider repositories have the following general structure:
     ```
 
 ## Adding Mappings, Building the Provider and SDKs
+
+> [!NOTE]
+> Recent versions of this repository leverage [automatic token mapping](https://github.com/pulumi/pulumi-terraform-bridge/blob/master/docs/automatic-token-mapping.md) as an alternative to mapping resources manually. If you did not see any warnings about unmapped resources in the step above, you may skip directly to building the provider binary.
 
 In this section we will add the mappings that allow the interoperation between the Pulumi provider and the Terraform provider.  Terraform resources map to an identically named concept in Pulumi.  Terraform data sources map to plain old functions in your supported programming language of choice.  Pulumi also allows provider functions and resources to be grouped into _namespaces_ to improve the cohesion of a provider's code, thereby making it easier for developers to use.  If your provider has a large number of resources, consider using namespaces to improve usability.
 
