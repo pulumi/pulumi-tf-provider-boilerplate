@@ -32,5 +32,4 @@ The examples and integration tests in this repository will create and destroy re
 cloud resources while running. Before running these tests, make sure that you have
 configured access to your cloud provider with Pulumi.
 
-_TODO: Add any steps you need to take to run integration tests here_
-
+*TODO: Add any steps you need to take to run integration tests here*
