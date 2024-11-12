@@ -23,9 +23,8 @@ import (
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-
-	// Replace this provider with the provider you are bridging.
-	xyz "github.com/pulumi/terraform-provider-xyz/provider"
+	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
+	xyz "github.com/pulumi/terraform-provider-xyz/provider" // Import the upstream provider
 
 	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
 )
@@ -115,7 +114,7 @@ func Provider() tfbridge.ProviderInfo {
 		DisplayName: "",
 		// Change this to your personal name (or a company name) that you would like to be shown in
 		// the Pulumi Registry if this package is published there.
-		Publisher: "abc",
+		Publisher: "Pulumi",
 		// LogoURL is optional but useful to help identify your package in the Pulumi Registry
 		// if this package is published there.
 		//
@@ -130,7 +129,7 @@ func Provider() tfbridge.ProviderInfo {
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{"abc", "xyz", "category/cloud"},
+		Keywords:   []string{"xyz", "category/cloud"},
 		License:    "Apache-2.0",
 		Homepage:   "https://www.pulumi.com",
 		Repository: "https://github.com/pulumi/pulumi-xyz",
@@ -138,42 +137,53 @@ func Provider() tfbridge.ProviderInfo {
 		// match the TF provider module's require directive, not any replace directives.
 		GitHubOrg:    "",
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
-		Config:       map[string]*tfbridge.SchemaInfo{
+		Config: map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
-			// "region": {
-			// 	Type: tfbridge.MakeType("region", "Region"),
-			// 	Default: &tfbridge.DefaultInfo{
-			// 		EnvVars: []string{"AWS_REGION", "AWS_DEFAULT_REGION"},
-			// 	},
-			// },
+			"region": {
+				Type: "xyz:region/region:Region",
+			},
+		},
+		// If extra types are needed for configuration, they can be added here.
+		ExtraTypes: map[string]schema.ComplexTypeSpec{
+			"xyz:region/region:Region": {
+				ObjectTypeSpec: schema.ObjectTypeSpec{
+					Type: "string",
+				},
+				Enum: []schema.EnumValueSpec{
+					{Name: "here", Value: "HERE"},
+					{Name: "overThere", Value: "OVER_THERE"},
+				},
+			},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			// List any npm dependencies and their versions
-			Dependencies: map[string]string{
-				"@pulumi/pulumi": "^3.0.0",
-			},
-			DevDependencies: map[string]string{
-				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
-				"@types/mime": "^2.0.0",
-			},
+			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
+			RespectSchemaVersion: true,
 		},
 		Python: &tfbridge.PythonInfo{
-			// List any Python dependencies and their version ranges
-			Requires: map[string]string{
-				"pulumi": ">=3.0.0,<4.0.0",
-			},
+			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
+			RespectSchemaVersion: true,
+			// Enable modern PyProject support in the generated Python SDK.
+			PyProject: struct{ Enabled bool }{true},
 		},
 		Golang: &tfbridge.GolangInfo{
+			// Set where the SDK is going to be published to.
 			ImportBasePath: path.Join(
 				"github.com/pulumi/pulumi-xyz/sdk/",
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				mainPkg,
 			),
+			// Opt in to all available code generation features.
 			GenerateResourceContainerTypes: true,
+			GenerateExtraInputTypes:        true,
+			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
+			RespectSchemaVersion: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
+			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
+			RespectSchemaVersion: true,
+			// Use a wildcard import so NuGet will prefer the latest possible version.
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},

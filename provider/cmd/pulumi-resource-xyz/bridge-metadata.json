@@ -1,1 +1,17 @@
-{}
+{
+    "auto-aliasing": {
+        "resources": {
+            "xyz_resource": {
+                "current": "xyz:index/resource:Resource",
+                "majorVersion": 1
+            }
+        },
+        "datasources": {
+            "xyz_data_source": {
+                "current": "xyz:index/getDataSource:getDataSource",
+                "majorVersion": 1
+            }
+        }
+    },
+    "auto-settings": {}
+}
