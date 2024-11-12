@@ -18,6 +18,7 @@ import (
 	_ "embed"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+
 	xyz "github.com/pulumi/pulumi-xyz/provider"
 	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
 )

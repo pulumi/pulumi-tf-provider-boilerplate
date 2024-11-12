@@ -2,7 +2,6 @@
     "name": "xyz",
     "description": "A Pulumi package for creating and managing xyz cloud resources.",
     "keywords": [
-        "abc",
         "xyz",
         "category/cloud"
     ],
@@ -10,7 +9,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`xyz` Terraform Provider](https://github.com/terraform-providers/terraform-provider-xyz).",
     "repository": "https://github.com/pulumi/pulumi-xyz",
-    "publisher": "abc",
+    "publisher": "Pulumi",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
@@ -19,38 +18,71 @@
             "packageReferences": {
                 "Pulumi": "3.*"
             },
-            "compatibility": "tfbridge20"
+            "compatibility": "tfbridge20",
+            "respectSchemaVersion": true
         },
         "go": {
             "importBasePath": "github.com/pulumi/pulumi-xyz/sdk/go/xyz",
             "generateResourceContainerTypes": true,
-            "generateExtraInputTypes": true
+            "generateExtraInputTypes": true,
+            "respectSchemaVersion": true
         },
         "nodejs": {
             "packageDescription": "A Pulumi package for creating and managing xyz cloud resources.",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-xyz)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-xyz` repo](https://github.com/pulumi/pulumi-xyz/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-xyz` repo](https://github.com/terraform-providers/terraform-provider-xyz/issues).",
-            "dependencies": {
-                "@pulumi/pulumi": "^3.0.0"
-            },
-            "devDependencies": {
-                "@types/mime": "^2.0.0",
-                "@types/node": "^10.0.0"
-            },
             "compatibility": "tfbridge20",
-            "disableUnionOutputTypes": true
+            "disableUnionOutputTypes": true,
+            "respectSchemaVersion": true
         },
         "python": {
-            "requires": {
-                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
-            },
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-xyz)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-xyz` repo](https://github.com/pulumi/pulumi-xyz/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-xyz` repo](https://github.com/terraform-providers/terraform-provider-xyz/issues).",
             "compatibility": "tfbridge20",
-            "pyproject": {}
+            "respectSchemaVersion": true,
+            "pyproject": {
+                "enabled": true
+            }
         }
     },
-    "config": {},
+    "config": {
+        "variables": {
+            "region": {
+                "type": "string",
+                "$ref": "#/types/xyz:region/region:Region",
+                "description": "A region which should be used.\n"
+            }
+        }
+    },
+    "types": {
+        "xyz:region/region:Region": {
+            "type": "string",
+            "enum": [
+                {
+                    "name": "here",
+                    "value": "HERE"
+                },
+                {
+                    "name": "overThere",
+                    "value": "OVER_THERE"
+                }
+            ]
+        }
+    },
     "provider": {
-        "description": "The provider type for the xyz package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n"
+        "description": "The provider type for the xyz package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "region": {
+                "type": "string",
+                "$ref": "#/types/xyz:region/region:Region",
+                "description": "A region which should be used.\n"
+            }
+        },
+        "inputProperties": {
+            "region": {
+                "type": "string",
+                "$ref": "#/types/xyz:region/region:Region",
+                "description": "A region which should be used.\n"
+            }
+        }
     },
     "resources": {
         "xyz:index/resource:Resource": {
@@ -96,18 +128,18 @@
                 "description": "A collection of values returned by getDataSource.\n",
                 "properties": {
                     "id": {
-                        "type": "string",
-                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                        "description": "The provider-assigned unique ID for this managed resource.\n",
+                        "type": "string"
                     },
                     "sampleAttribute": {
                         "type": "string"
                     }
                 },
-                "type": "object",
                 "required": [
                     "sampleAttribute",
                     "id"
-                ]
+                ],
+                "type": "object"
             }
         }
     }
