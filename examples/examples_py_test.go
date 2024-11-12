@@ -1,3 +1,4 @@
+// Copyright 2024, Pulumi Corporation.  All rights reserved.
 //go:build python || all
 // +build python all
 
@@ -10,13 +11,13 @@ import (
 	"github.com/pulumi/pulumi/pkg/v3/testing/integration"
 )
 
-func getPythonBaseOptions(t *testing.T) integration.ProgramTestOptions {
-	base := getBaseOptions()
-	basePython := base.With(integration.ProgramTestOptions{
-		Dependencies: []string{
-			filepath.Join("..", "sdk", "python", "bin"),
-		},
-	})
+func TestBasicPy(t *testing.T) {
+	t.Skip("Skipping until the provider has been implemented")
 
-	return basePython
+	test := getPythonBaseOptions(t).
+		With(integration.ProgramTestOptions{
+			Dir: filepath.Join(getCwd(t), "basic-py"),
+		})
+
+	integration.ProgramTest(t, &test)
 }
