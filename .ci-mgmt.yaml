@@ -48,8 +48,5 @@ publish:
 # Disables a pulumi-internal-only step for running create_docs_build during the release
 publishRegistry: false
 
-# Disables the pulumi-internal mechanism for auto-releasing after merging PRs with special labels.
-enableAutoRelease: false
-
 # For additional options, please refer to the defaults set in ci-mgmt:
 # https://github.com/pulumi/ci-mgmt/blob/master/provider-ci/internal/pkg/templates/defaults.config.yaml
