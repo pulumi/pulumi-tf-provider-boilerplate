@@ -22,9 +22,15 @@ on:
     # 3 AM UTC ~ 8 PM PDT / 7 PM PST daily. Time chosen to run during off hours.
     - cron: 0 3 * * *
 
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
 env:
-  GH_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
+  GH_TOKEN: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN || secrets.PULUMI_BOT_TOKEN || secrets.GITHUB_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   upgrade_provider:
     name: upgrade-provider

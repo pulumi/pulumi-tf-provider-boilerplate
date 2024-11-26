@@ -49,9 +49,16 @@ on:
         required: false
         type: boolean
         default: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
 env:
-  GH_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
+  GH_TOKEN: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN || secrets.PULUMI_BOT_TOKEN || secrets.GITHUB_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
 jobs:
   upgrade_provider:
     name: upgrade-provider
