@@ -72,13 +72,13 @@ def get_data_source(sample_attribute: Optional[str] = None,
         id=pulumi.get(__ret__, 'id'),
         sample_attribute=pulumi.get(__ret__, 'sample_attribute'))
 def get_data_source_output(sample_attribute: Optional[pulumi.Input[str]] = None,
-                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetDataSourceResult]:
+                           opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetDataSourceResult]:
     """
     Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['sampleAttribute'] = sample_attribute
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('xyz:index/getDataSource:getDataSource', __args__, opts=opts, typ=GetDataSourceResult)
     return __ret__.apply(lambda __response__: GetDataSourceResult(
         id=pulumi.get(__response__, 'id'),
