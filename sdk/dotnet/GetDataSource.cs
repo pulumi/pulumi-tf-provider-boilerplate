@@ -16,6 +16,9 @@ namespace Pulumi.Xyz
 
         public static Output<GetDataSourceResult> Invoke(GetDataSourceInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataSourceResult>("xyz:index/getDataSource:getDataSource", args ?? new GetDataSourceInvokeArgs(), options.WithDefaults());
+
+        public static Output<GetDataSourceResult> Invoke(GetDataSourceInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetDataSourceResult>("xyz:index/getDataSource:getDataSource", args ?? new GetDataSourceInvokeArgs(), options.WithDefaults());
     }
 
 
