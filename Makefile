@@ -188,7 +188,7 @@ install_go_sdk:
 install_java_sdk:
 install_nodejs_sdk: .make/install_nodejs_sdk
 .make/install_nodejs_sdk: .make/build_nodejs
-	yarn link --cwd $(WORKING_DIR)/sdk/nodejs/bin
+	yarn --cwd link $(WORKING_DIR)/sdk/nodejs/bin
 	@touch $@
 install_python_sdk:
 .PHONY: install_dotnet_sdk install_go_sdk install_java_sdk install_nodejs_sdk install_python_sdk
