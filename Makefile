@@ -15,7 +15,7 @@ PULUMI_PROVIDER_BUILD_PARALLELISM ?=
 PULUMI_CONVERT := 1
 PULUMI_MISSING_DOCS_ERROR := true
 
-PULUMICTL_VERSION := v0.0.46
+PULUMICTL_VERSION := v0.0.48
 PULUMICTL := $(shell which pulumictl || \
 	(test ! -e $(WORKING_DIR)/bin/pulumictl && \
 		GOPATH="$(WORKING_DIR)" go install "github.com/pulumi/pulumictl/cmd/pulumictl@$(PULUMICTL_VERSION)"; \

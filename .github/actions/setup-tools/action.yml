@@ -42,7 +42,7 @@ runs:
       if: inputs.tools == 'all' || contains(inputs.tools, 'pulumictl')
       uses: jaxxstorm/action-install-gh-release@cd6b2b78ad38bdd294341cda064ec0692b06215b # v1.14.0
       with:
-        tag: v0.0.46
+        tag: v0.0.48
         repo: pulumi/pulumictl
 
     - name: Install Pulumi CLI
