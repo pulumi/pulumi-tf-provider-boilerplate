@@ -50,3 +50,6 @@ publishRegistry: false
 
 # For additional options, please refer to the defaults set in ci-mgmt:
 # https://github.com/pulumi/ci-mgmt/blob/master/provider-ci/internal/pkg/templates/defaults.config.yaml
+
+toolVersions:
+  pulumictl: "v0.0.48"
