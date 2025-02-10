@@ -80,7 +80,7 @@ Pulumi provider repositories have the following general structure:
 ## Build the Provider and SDKs
 
 > [!NOTE]
-> Most providers can use [automatic token mapping](https://github.com/pulumi/pulumi-terraform-bridge/blob/master/docs/automatic-token-mapping.md) which generates the `bridge-metadata.json` file. If you have warnings about unmapped resources in the step above, refer to the section on [Manual Mappings](#manual-mappings).
+> Most providers can use [automatic token mapping](https://github.com/pulumi/pulumi-terraform-bridge/blob/master/docs/guides/automatic-token-mapping.md) which generates the `bridge-metadata.json` file. If you have warnings about unmapped resources in the step above, refer to the section on [Manual Mappings](#manual-mappings).
 > If you need to customise the behaviour of the provider configuration, refer to the section [Customise Provider Configuration](#customise-provider-configuration).
 
 1. Build the provider binary and ensure there are no warnings about unmapped resources and no warnings about unmapped data sources:
