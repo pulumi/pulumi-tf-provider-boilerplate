@@ -25,7 +25,7 @@ OPTIONS
   -h, --help
     Print this help message and exit.
 
-  -n <provider>
+  -p <provider>
     The provider name to initialize the project for (e.g. aws).
 
   -r <repository>
@@ -37,7 +37,7 @@ OPTIONS
 
   -u <upstream>
     The upstream tf provider Go module to bridge into a Pulumi provider.
-    (e.g. hashicorp/terraform-provider-aws).
+    (e.g. github.com/hashicorp/terraform-aws).
 
   -v
     Enable verbose mode. Prints each command executed.
