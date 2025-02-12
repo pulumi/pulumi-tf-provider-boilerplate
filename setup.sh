@@ -25,7 +25,7 @@ OPTIONS
   -h, --help
     Print this help message and exit.
 
-  -n <provider>
+  -p <provider>
     The provider name to initialize the project for (e.g. aws).
 
   -r <repository>
