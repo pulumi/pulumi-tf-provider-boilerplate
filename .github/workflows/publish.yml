@@ -57,6 +57,7 @@ jobs:
       uses: ./.github/actions/setup-tools
       with:
         tools: pulumictl, pulumicli, go, schema-tools
+        cache-go: false
     - name: Create dist directory
       run: mkdir -p dist
     - name: Download provider assets
