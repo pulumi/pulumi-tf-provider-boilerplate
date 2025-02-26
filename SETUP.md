@@ -186,6 +186,18 @@ This is configured via the [`.ci-mgmt.yaml`](.ci-mgmt.yaml) file and can be re-g
 
 The default configuration is designed for third-party use and will need to be adjusted for Pulumi internal providers.
 
+### CI Management
+
+When you have set up your provider with this template, your `.github/workflows` folder will contain a `resync-build.yml` Workflow
+which runs a once-a week cronjob to upgrade the workflow files to match the latest process for Pulumi providers.
+
+The Workflow will open a pull request so you can review the changes, make adjustments to your `.ci-mgmt.yaml` config file, and merge.
+
+We recommend setting `PULUMI_PROVIDER_AUTOMATION_TOKEN` to a token with Write scope permissions on your repository so that acceptance tests run on these automated pull requests.
+
+Documentation for the settings available in `.ci-mgmt.yaml` is a work in progress, but the [source code comments](https://github.com/pulumi/ci-mgmt/blob/master/provider-ci/internal/pkg/config.go)
+or [default config descriptions](https://github.com/pulumi/ci-mgmt/blob/master/provider-ci/internal/pkg/templates/defaults.config.yaml) may be useful.
+
 ## Final Steps
 
 1. Ensure all required configurations (API keys, etc.) are documented in README-PROVIDER.md.
