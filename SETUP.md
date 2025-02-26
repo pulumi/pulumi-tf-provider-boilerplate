@@ -193,7 +193,7 @@ which runs a once-a week cronjob to upgrade the workflow files to match the late
 
 The Workflow will open a pull request so you can review the changes, make adjustments to your `.ci-mgmt.yaml` config file, and merge.
 
-We recommend setting `PULUMI_PROVIDER_AUTOMATION_TOKEN` to a token with Write scope permissions on your repository so that acceptance tests run on these automated pull requests.
+We recommend setting `PULUMI_PROVIDER_AUTOMATION_TOKEN` to a token with `pull-requests: write` permissions on your repository so that acceptance tests run on these automated pull requests.
 
 Documentation for the settings available in `.ci-mgmt.yaml` is a work in progress, but the [source code comments](https://github.com/pulumi/ci-mgmt/blob/master/provider-ci/internal/pkg/config.go)
 or [default config descriptions](https://github.com/pulumi/ci-mgmt/blob/master/provider-ci/internal/pkg/templates/defaults.config.yaml) may be useful.
