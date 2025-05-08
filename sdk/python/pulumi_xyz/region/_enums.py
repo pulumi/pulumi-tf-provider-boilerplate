@@ -3,7 +3,7 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import builtins
-import builtins
+import pulumi
 from enum import Enum
 
 __all__ = [
@@ -11,6 +11,7 @@ __all__ = [
 ]
 
 
+@pulumi.type_token("xyz:region/region:Region")
 class Region(builtins.str, Enum):
     HERE = "HERE"
     OVER_THERE = "OVER_THERE"
