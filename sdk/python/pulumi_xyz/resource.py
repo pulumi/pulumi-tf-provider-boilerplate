@@ -65,10 +65,8 @@ class _ResourceState:
         pulumi.set(self, "sample_attribute", value)
 
 
+@pulumi.type_token("xyz:index/resource:Resource")
 class Resource(pulumi.CustomResource):
-
-    pulumi_type = "xyz:index/resource:Resource"
-
     @overload
     def __init__(__self__,
                  resource_name: str,
