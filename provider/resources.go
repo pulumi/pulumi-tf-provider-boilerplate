@@ -88,7 +88,7 @@ func Provider() tfbridge.ProviderInfo {
 		//      `tfbridge.Main` so it looks like this:
 		//
 		//      	tfbridge.Main(context.Background(), "xyz", xyz.Provider(),
-		//			tfbridge.ProviderMetadata{PulumiSchema: pulumiSchema})
+		//			tfbridge.ProviderMetadata{PackageSchema: pulumiSchema})
 		//
 		//   Detailed instructions can be found at
 		//   https://pulumi-developer-docs.readthedocs.io/projects/pulumi-terraform-bridge/en/latest/docs/guides/new-pf-provider.html
