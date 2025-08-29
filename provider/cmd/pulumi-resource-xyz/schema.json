@@ -48,7 +48,7 @@
             "region": {
                 "type": "string",
                 "$ref": "#/types/xyz:region/region:Region",
-                "description": "A region which should be used.\n"
+                "description": "A region which should be used."
             }
         }
     },
@@ -73,14 +73,14 @@
             "region": {
                 "type": "string",
                 "$ref": "#/types/xyz:region/region:Region",
-                "description": "A region which should be used.\n"
+                "description": "A region which should be used."
             }
         },
         "inputProperties": {
             "region": {
                 "type": "string",
                 "$ref": "#/types/xyz:region/region:Region",
-                "description": "A region which should be used.\n"
+                "description": "A region which should be used."
             }
         },
         "methods": {
@@ -92,13 +92,13 @@
             "properties": {
                 "sampleAttribute": {
                     "type": "string",
-                    "description": "Sample attribute.\n"
+                    "description": "Sample attribute."
                 }
             },
             "inputProperties": {
                 "sampleAttribute": {
                     "type": "string",
-                    "description": "Sample attribute.\n"
+                    "description": "Sample attribute."
                 }
             },
             "stateInputs": {
@@ -106,7 +106,7 @@
                 "properties": {
                     "sampleAttribute": {
                         "type": "string",
-                        "description": "Sample attribute.\n"
+                        "description": "Sample attribute."
                     }
                 },
                 "type": "object"
@@ -160,7 +160,7 @@
                 "description": "A collection of values returned by getDataSource.\n",
                 "properties": {
                     "id": {
-                        "description": "The provider-assigned unique ID for this managed resource.\n",
+                        "description": "The provider-assigned unique ID for this managed resource.",
                         "type": "string"
                     },
                     "sampleAttribute": {
