@@ -35,7 +35,7 @@ export class Resource extends pulumi.CustomResource {
     /**
      * Sample attribute.
      */
-    public readonly sampleAttribute!: pulumi.Output<string | undefined>;
+    declare public readonly sampleAttribute: pulumi.Output<string | undefined>;
 
     /**
      * Create a Resource resource with the given unique name, arguments, and options.
@@ -50,10 +50,10 @@ export class Resource extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ResourceState | undefined;
-            resourceInputs["sampleAttribute"] = state ? state.sampleAttribute : undefined;
+            resourceInputs["sampleAttribute"] = state?.sampleAttribute;
         } else {
             const args = argsOrState as ResourceArgs | undefined;
-            resourceInputs["sampleAttribute"] = args ? args.sampleAttribute : undefined;
+            resourceInputs["sampleAttribute"] = args?.sampleAttribute;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Resource.__pulumiType, name, resourceInputs, opts);
