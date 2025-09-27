@@ -1,55 +1,39 @@
 # REQUIRED: provider is the name of the provider without the pulumi-prefix e.g. "aws".
 provider: xyz
-
 # The name of the GitHub organization or username the repository lives in. Defaults to 'pulumi'
 organization: pulumi
-
 # The external template only includes workflows relevant for non-Pulumi managed providers.
 template: external-bridged-provider
-
 # The name of the GitHub organisation or username where the upstream terraform provider lives.
 upstreamProviderOrg: pulumi
-
 # major version of the current provider - used in make files
 # This should always be set by all providers as this is key to go module paths.
 major-version: 1
-
 # Enable using the terraform converter for example generation.
 pulumiConvert: 1
-
 # Set a GitHub username here for automatic upgrade PRs to be assigned to.
 # pr-assign: pulumi-bot
 
 # List of pulumi plugins to install in the "install_plugins" makefile target. Will include at least the terraform plugin
 # Should be set for all bridged providers
 plugins:
-  - name: terraform
-    version: "1.0.16"
-    kind: converter
-
+    - name: terraform
+      version: "1.0.16"
+      kind: converter
 # providerDefaultBranch is used to customise the default branch for the repo
 providerDefaultBranch: main
-
 # Explicit list of languages to support for SDKs. Java is currently excluded because it doesn't yet work well for non-internal providers.
 languages:
-  - dotnet
-  - go
-  - nodejs
-  - python
-
+    - dotnet
+    - go
+    - nodejs
+    - python
 # Disable Java publishing and pushing the provider binary to the CDN as these only work internally within Pulumi.
 publish:
-  sdk: "all,!java"
-  cdn: false
-
+    sdk: "all,!java"
+    cdn: false
 # Enables automatic generation of basic docs pages for the registry.
 # registryDocs: true
 
 # Disables a pulumi-internal-only step for running create_docs_build during the release
 publishRegistry: false
-
-# For additional options, please refer to the defaults set in ci-mgmt:
-# https://github.com/pulumi/ci-mgmt/blob/master/provider-ci/internal/pkg/templates/defaults.config.yaml
-
-toolVersions:
-  pulumictl: "v0.0.48"

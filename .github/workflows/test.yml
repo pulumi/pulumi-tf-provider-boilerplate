@@ -19,6 +19,7 @@ env:
   PULUMI_BOT_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
   PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/..
   PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
+  PULUMI_PROVIDER_AUTOMATION_TOKEN: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN }}
   RELEASE_BOT_ENDPOINT: ${{ secrets.RELEASE_BOT_ENDPOINT }}
   RELEASE_BOT_KEY: ${{ secrets.RELEASE_BOT_KEY }}
   S3_COVERAGE_BUCKET_NAME: ${{ secrets.S3_COVERAGE_BUCKET_NAME }}
@@ -48,16 +49,31 @@ jobs:
       with:
         repository: pulumi/examples
         path: p-examples
-    - name: Setup tools
-      uses: ./.github/actions/setup-tools
+    - name: Setup mise
+      uses: jdx/mise-action@v3
+      env:
+        MISE_ENV: test
       with:
-        tools: pulumictl, pulumicli, ${{ matrix.language }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        cache_key: "mise-{{platform}}-{{file_hash}}"
+        # also save this cache since we are using a different mise env.
+        cache_save: true
     - name: Prepare local workspace
       run: make prepare_local_workspace
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Download bin
       uses: ./.github/actions/download-provider
+    - name: Setup Go Cache
+      uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5
+      if: matrix.language == 'go' || contains(matrix.language, 'go')
+      with:
+        cache-dependency-path: |
+          provider/*.sum
+          upstream/*.sum
+          sdk/go/*.sum
+          sdk/*.sum
+          *.sum
     - name: Download SDK
       uses: ./.github/actions/download-sdk
       with:

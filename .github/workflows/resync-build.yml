@@ -21,6 +21,13 @@ jobs:
         with:
           # Persist credentials so pull-workflow-changes can push a new branch.
           persist-credentials: true
+      - name: Setup mise
+        uses: jdx/mise-action@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          cache_key: "mise-{{platform}}-{{file_hash}}"
+          # only saving the cache in the prerequisites job
+          cache_save: false
       - name: Regenerate the workflow files via https://github.com/pulumi/ci-mgmt
         run: |
           make ci-mgmt
