@@ -56,10 +56,13 @@ jobs:
       - id: esc-secrets
         name: Map environment to ESC outputs
         uses: ./.github/actions/esc-action
-      - name: Setup tools
-        uses: ./.github/actions/setup-tools
+      - name: Setup mise
+        uses: jdx/mise-action@v3
         with:
-          tools: pulumictl, pulumicli, dotnet, go, nodejs, python
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          cache_key: "mise-{{platform}}-{{file_hash}}"
+          # only saving the cache in the prerequisites job
+          cache_save: false
       - name: Install upgrade-provider
         run: go install github.com/pulumi/upgrade-provider@${{ inputs.upgradeProviderVersion || 'main' }}
         shell: bash
