@@ -14,12 +14,6 @@ pulumiConvert: 1
 # Set a GitHub username here for automatic upgrade PRs to be assigned to.
 # pr-assign: pulumi-bot
 
-# List of pulumi plugins to install in the "install_plugins" makefile target. Will include at least the terraform plugin
-# Should be set for all bridged providers
-plugins:
-    - name: terraform
-      version: "1.0.16"
-      kind: converter
 # providerDefaultBranch is used to customise the default branch for the repo
 providerDefaultBranch: main
 # Explicit list of languages to support for SDKs. Java is currently excluded because it doesn't yet work well for non-internal providers.
