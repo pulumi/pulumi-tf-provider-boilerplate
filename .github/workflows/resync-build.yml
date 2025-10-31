@@ -2,9 +2,6 @@
 name: "Resync Build Workflows"
 
 on:
-  schedule:
-    # 3 AM UTC ~ 8 PM PDT / 7 PM PST every Tuesday.
-    - cron: 0 3 * * TUE
   workflow_dispatch:
 
 permissions:
