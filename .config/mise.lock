@@ -60,6 +60,11 @@ checksum = "sha256:279c6d3124f8b0251b16297b16687fe8b3946410b05ed27de1259b5e5cea0
 size = 195379320
 url = "https://corretto.aws/downloads/resources/11.0.29.7.1/amazon-corretto-11.0.29.7.1-linux-x64.tar.gz"
 
+[tools.java.platforms.macos-arm64]
+checksum = "sha256:3fcf93300022d20f6a460221cba0a4c7337679b777699409f2db4d20ae9b69b5"
+size = 185375727
+url = "https://corretto.aws/downloads/resources/11.0.29.7.1/amazon-corretto-11.0.29.7.1-macosx-aarch64.tar.gz"
+
 [[tools.node]]
 version = "20.19.5"
 backend = "core:node"
