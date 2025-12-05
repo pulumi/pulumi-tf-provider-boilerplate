@@ -130,8 +130,9 @@ fi
 OS=$(uname)
 sed_inplace() {
   if [[ "${OS}" == "Darwin" ]]; then
-    # In MacOS the -i parameter needs an empty string to execute in place.
-    sed -i '' "${2}" "${1}" &> /dev/null
+    # If this is macOS, explicitly use BSD sed from /usr/bin to avoid issues
+    # with GNU sed installed via Homebrew.
+    /usr/bin/sed -i '' "${2}" "${1}" &> /dev/null
   else
     sed -i "${2}" "${1}" &> /dev/null
   fi
