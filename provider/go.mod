@@ -127,8 +127,8 @@ require (
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
 	github.com/pulumi/esc v0.21.0 // indirect
 	github.com/pulumi/inflector v0.2.1 // indirect
-	github.com/pulumi/pulumi-java/pkg v1.20.0 // indirect
-	github.com/pulumi/pulumi-yaml v1.26.1 // indirect
+	github.com/pulumi/pulumi-java/pkg v1.21.0 // indirect
+	github.com/pulumi/pulumi-yaml v1.26.2 // indirect
 	github.com/pulumi/pulumi/sdk/v3 v3.218.0 // indirect
 	github.com/pulumi/terraform-diff-reader v0.0.2 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
