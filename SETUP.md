@@ -8,6 +8,7 @@ This repository is initially set up as a fictitious provider named "xyz" to demo
 
 Ensure the following tools are installed and present in your `$PATH`:
 
+- [`mise`](https://mise.jdx.dev/getting-started.html)
 - [`pulumictl`](https://github.com/pulumi/pulumictl#installation)
 - [Go](https://golang.org/dl/) or 1.latest
 - [`golangci-lint`](https://golangci-lint.run/welcome/install/)
