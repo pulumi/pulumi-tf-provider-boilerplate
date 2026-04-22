@@ -22,6 +22,7 @@ class ResourceArgs:
                  sample_attribute: Optional[pulumi.Input[_builtins.str]] = None):
         """
         The set of arguments for constructing a Resource resource.
+
         :param pulumi.Input[_builtins.str] sample_attribute: Sample attribute.
         """
         if sample_attribute is not None:
@@ -46,6 +47,7 @@ class _ResourceState:
                  sample_attribute: Optional[pulumi.Input[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering Resource resources.
+
         :param pulumi.Input[_builtins.str] sample_attribute: Sample attribute.
         """
         if sample_attribute is not None:
@@ -74,6 +76,7 @@ class Resource(pulumi.CustomResource):
                  __props__=None):
         """
         Create a Resource resource with the given unique name, props, and options.
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] sample_attribute: Sample attribute.
@@ -86,6 +89,7 @@ class Resource(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Create a Resource resource with the given unique name, props, and options.
+
         :param str resource_name: The name of the resource.
         :param ResourceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
