@@ -19,7 +19,7 @@ __all__ = ['ResourceArgs', 'Resource']
 @pulumi.input_type
 class ResourceArgs:
     def __init__(__self__, *,
-                 sample_attribute: Optional[pulumi.Input[_builtins.str]] = None):
+                 sample_attribute: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a Resource resource.
 
@@ -30,21 +30,21 @@ class ResourceArgs:
 
     @_builtins.property
     @pulumi.getter(name="sampleAttribute")
-    def sample_attribute(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def sample_attribute(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Sample attribute.
         """
         return pulumi.get(self, "sample_attribute")
 
     @sample_attribute.setter
-    def sample_attribute(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def sample_attribute(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "sample_attribute", value)
 
 
 @pulumi.input_type
 class _ResourceState:
     def __init__(__self__, *,
-                 sample_attribute: Optional[pulumi.Input[_builtins.str]] = None):
+                 sample_attribute: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering Resource resources.
 
@@ -55,14 +55,14 @@ class _ResourceState:
 
     @_builtins.property
     @pulumi.getter(name="sampleAttribute")
-    def sample_attribute(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def sample_attribute(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Sample attribute.
         """
         return pulumi.get(self, "sample_attribute")
 
     @sample_attribute.setter
-    def sample_attribute(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def sample_attribute(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "sample_attribute", value)
 
 
@@ -72,7 +72,7 @@ class Resource(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 sample_attribute: Optional[pulumi.Input[_builtins.str]] = None,
+                 sample_attribute: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Create a Resource resource with the given unique name, props, and options.
@@ -105,7 +105,7 @@ class Resource(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 sample_attribute: Optional[pulumi.Input[_builtins.str]] = None,
+                 sample_attribute: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -126,7 +126,7 @@ class Resource(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            sample_attribute: Optional[pulumi.Input[_builtins.str]] = None) -> 'Resource':
+            sample_attribute: pulumi.Input[Optional[_builtins.str]] = None) -> 'Resource':
         """
         Get an existing Resource resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

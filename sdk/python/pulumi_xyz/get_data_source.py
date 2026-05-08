@@ -71,7 +71,7 @@ def get_data_source(sample_attribute: Optional[_builtins.str] = None,
     return AwaitableGetDataSourceResult(
         id=pulumi.get(__ret__, 'id'),
         sample_attribute=pulumi.get(__ret__, 'sample_attribute'))
-def get_data_source_output(sample_attribute: Optional[pulumi.Input[_builtins.str]] = None,
+def get_data_source_output(sample_attribute: pulumi.Input[Optional[_builtins.str]] = None,
                            opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetDataSourceResult]:
     """
     Use this data source to access information about an existing resource.
