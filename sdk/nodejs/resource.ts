@@ -67,7 +67,7 @@ export interface ResourceState {
     /**
      * Sample attribute.
      */
-    sampleAttribute?: pulumi.Input<string>;
+    sampleAttribute?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -77,5 +77,5 @@ export interface ResourceArgs {
     /**
      * Sample attribute.
      */
-    sampleAttribute?: pulumi.Input<string>;
+    sampleAttribute?: pulumi.Input<string | undefined>;
 }

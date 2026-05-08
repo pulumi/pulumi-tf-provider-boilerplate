@@ -63,7 +63,7 @@ export interface ProviderArgs {
     /**
      * A region which should be used.
      */
-    region?: pulumi.Input<enums.region.Region>;
+    region?: pulumi.Input<enums.region.Region | undefined>;
 }
 
 export namespace Provider {

@@ -20,7 +20,7 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
-                 region: Optional[pulumi.Input['region.Region']] = None):
+                 region: pulumi.Input[Optional['region.Region']] = None):
         """
         The set of arguments for constructing a Provider resource.
 
@@ -31,14 +31,14 @@ class ProviderArgs:
 
     @_builtins.property
     @pulumi.getter
-    def region(self) -> Optional[pulumi.Input['region.Region']]:
+    def region(self) -> pulumi.Input[Optional['region.Region']]:
         """
         A region which should be used.
         """
         return pulumi.get(self, "region")
 
     @region.setter
-    def region(self, value: Optional[pulumi.Input['region.Region']]):
+    def region(self, value: pulumi.Input[Optional['region.Region']]):
         pulumi.set(self, "region", value)
 
 
@@ -48,7 +48,7 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 region: Optional[pulumi.Input['region.Region']] = None,
+                 region: pulumi.Input[Optional['region.Region']] = None,
                  __props__=None):
         """
         The provider type for the xyz package. By default, resources use package-wide configuration
@@ -89,7 +89,7 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 region: Optional[pulumi.Input['region.Region']] = None,
+                 region: pulumi.Input[Optional['region.Region']] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
