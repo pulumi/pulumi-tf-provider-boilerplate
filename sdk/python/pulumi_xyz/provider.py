@@ -99,12 +99,20 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
-            __props__.__dict__["region"] = pulumi.Output.from_input(region).apply(pulumi.runtime.to_json) if region is not None else None
+            __props__.__dict__["region"] = region
         super(Provider, __self__).__init__(
             'xyz',
             resource_name,
             __props__,
             opts)
+
+    @_builtins.property
+    @pulumi.getter
+    def region(self) -> pulumi.Output[Optional['region.Region']]:
+        """
+        A region which should be used.
+        """
+        return pulumi.get(self, "region")
 
     @pulumi.output_type
     class TerraformConfigResult:
