@@ -28,6 +28,10 @@ export class Provider extends pulumi.ProviderResource {
         return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
+    /**
+     * A region which should be used.
+     */
+    declare public readonly region: pulumi.Output<enums.region.Region | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
