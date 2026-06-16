@@ -18,6 +18,9 @@ import (
 // [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
 type Provider struct {
 	pulumi.ProviderResourceState
+
+	// A region which should be used.
+	Region region.RegionPtrOutput `pulumi:"region"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
@@ -105,6 +108,11 @@ func (o ProviderOutput) ToProviderOutput() ProviderOutput {
 
 func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) ProviderOutput {
 	return o
+}
+
+// A region which should be used.
+func (o ProviderOutput) Region() region.RegionPtrOutput {
+	return o.ApplyT(func(v *Provider) region.RegionPtrOutput { return v.Region }).(region.RegionPtrOutput)
 }
 
 func init() {
