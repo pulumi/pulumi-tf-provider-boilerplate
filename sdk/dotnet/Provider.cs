@@ -19,6 +19,13 @@ namespace Pulumi.Xyz
     public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
+        /// A region which should be used.
+        /// </summary>
+        [Output("region")]
+        public Output<string?> Region { get; private set; } = null!;
+
+
+        /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
         /// </summary>
         ///
