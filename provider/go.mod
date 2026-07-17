@@ -160,7 +160,7 @@ require (
 	github.com/pulumi/inflector v0.2.1 // indirect
 	github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet/v3 v3.107.4-0.20260715145826-23e95ff11104 // indirect
 	github.com/pulumi/pulumi-java v1.32.0 // indirect
-	github.com/pulumi/pulumi-yaml v1.37.1-0.20260714114756-e94032103ed3 // indirect
+	github.com/pulumi/pulumi-yaml v1.37.1-0.20260717022643-c522eece9421 // indirect
 	github.com/pulumi/pulumi/sdk/v3 v3.253.0 // indirect
 	github.com/pulumi/terraform-diff-reader v0.0.2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
