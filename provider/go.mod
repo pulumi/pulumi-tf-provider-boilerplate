@@ -6,7 +6,7 @@ replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraf
 
 require (
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.140.0
-	github.com/pulumi/pulumi/pkg/v3 v3.266.0
+	github.com/pulumi/pulumi/pkg/v3 v3.267.0
 	github.com/pulumi/terraform-provider-xyz v0.0.3
 )
 
@@ -163,7 +163,7 @@ require (
 	github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet/v3 v3.114.1 // indirect
 	github.com/pulumi/pulumi-java v1.37.3 // indirect
 	github.com/pulumi/pulumi-yaml v1.38.8 // indirect
-	github.com/pulumi/pulumi/sdk/v3 v3.266.0 // indirect
+	github.com/pulumi/pulumi/sdk/v3 v3.267.0 // indirect
 	github.com/pulumi/terraform-diff-reader v0.0.2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
@@ -210,7 +210,7 @@ require (
 	go.opentelemetry.io/otel/sdk/log v0.22.0 // indirect
 	go.opentelemetry.io/otel/sdk/metric v1.46.0 // indirect
 	go.opentelemetry.io/otel/trace v1.46.0 // indirect
-	go.opentelemetry.io/proto/otlp v1.11.0 // indirect
+	go.opentelemetry.io/proto/otlp v1.11.1 // indirect
 	go.uber.org/atomic v1.12.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/crypto v0.57.0 // indirect
