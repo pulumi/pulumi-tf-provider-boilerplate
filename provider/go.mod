@@ -4,7 +4,7 @@ go 1.26.6
 
 require (
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.141.0
-	github.com/pulumi/pulumi/pkg/v3 v3.270.0
+	github.com/pulumi/pulumi/pkg/v3 v3.271.0
 	github.com/pulumi/terraform-provider-xyz v0.0.3
 )
 
@@ -156,12 +156,12 @@ require (
 	github.com/posener/complete v1.2.3 // indirect
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
 	github.com/pulumi/inflector v0.2.1 // indirect
-	github.com/pulumi/pulumi-cloud-sdk/go v1.20261019.0 // indirect
+	github.com/pulumi/pulumi-cloud-sdk/go v1.20261021.0 // indirect
 	github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet/v3 v3.114.2 // indirect
 	github.com/pulumi/pulumi-hcl v0.18.6 // indirect
 	github.com/pulumi/pulumi-java v1.37.6 // indirect
 	github.com/pulumi/pulumi-yaml v1.38.11 // indirect
-	github.com/pulumi/pulumi/sdk/v3 v3.270.0 // indirect
+	github.com/pulumi/pulumi/sdk/v3 v3.271.0 // indirect
 	github.com/pulumi/terraform-diff-reader v0.0.2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
@@ -226,8 +226,8 @@ require (
 	google.golang.org/api v0.290.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto v0.0.0-20260724162435-b2f20204f0df // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20261012220534-4341edf3f941 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20261012220534-4341edf3f941 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20261019180522-ce908d29299b // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20261019180522-ce908d29299b // indirect
 	google.golang.org/grpc v1.84.0 // indirect
 	google.golang.org/protobuf v1.36.12 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
