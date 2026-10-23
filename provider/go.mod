@@ -4,7 +4,7 @@ go 1.26.6
 
 require (
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.141.0
-	github.com/pulumi/pulumi/pkg/v3 v3.271.0
+	github.com/pulumi/pulumi/pkg/v3 v3.272.0
 	github.com/pulumi/terraform-provider-xyz v0.0.3
 )
 
@@ -156,12 +156,12 @@ require (
 	github.com/posener/complete v1.2.3 // indirect
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
 	github.com/pulumi/inflector v0.2.1 // indirect
-	github.com/pulumi/pulumi-cloud-sdk/go v1.20261021.0 // indirect
+	github.com/pulumi/pulumi-cloud-sdk/go v1.20261022.0 // indirect
 	github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet/v3 v3.115.0 // indirect
 	github.com/pulumi/pulumi-hcl v0.18.6 // indirect
 	github.com/pulumi/pulumi-java v1.37.7 // indirect
 	github.com/pulumi/pulumi-yaml v1.38.12 // indirect
-	github.com/pulumi/pulumi/sdk/v3 v3.271.0 // indirect
+	github.com/pulumi/pulumi/sdk/v3 v3.272.0 // indirect
 	github.com/pulumi/terraform-diff-reader v0.0.2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
