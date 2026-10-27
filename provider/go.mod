@@ -156,7 +156,7 @@ require (
 	github.com/posener/complete v1.2.3 // indirect
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
 	github.com/pulumi/inflector v0.2.1 // indirect
-	github.com/pulumi/pulumi-cloud-sdk/go v1.20261026.1126 // indirect
+	github.com/pulumi/pulumi-cloud-sdk/go v1.20261027.0 // indirect
 	github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet/v3 v3.116.1 // indirect
 	github.com/pulumi/pulumi-hcl v0.18.8 // indirect
 	github.com/pulumi/pulumi-java v1.37.8 // indirect
