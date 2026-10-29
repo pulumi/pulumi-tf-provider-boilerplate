@@ -24,6 +24,11 @@ java = 'corretto-11'
 golangci-lint = "2.15.0" # See note about about overrides if you need to customize this.
 "npm:yarn" = "1.22.22"
 
+[hooks]
+# Also install project dependencies during local setup. CI runs this explicitly
+# after mise-action because hook failures only produce warnings.
+postinstall = "mise deps install"
+
 [settings]
 experimental = true # Required for Go binaries (e.g. pulumictl).
 lockfile = false
