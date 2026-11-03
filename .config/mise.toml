@@ -31,6 +31,8 @@ postinstall = "mise deps install"
 
 [settings]
 experimental = true # Required for Go binaries (e.g. pulumictl).
+# Windows identity-layout junctions break Go's bundled-plugin path resolution.
+install_layout = "legacy"
 lockfile = false
 http_retries = 3
 pin = true # `mise use` should pin versions instead of defaulting to latest.
