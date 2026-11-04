@@ -143,6 +143,14 @@ class Resource(pulumi.CustomResource):
         __props__.__dict__["sample_attribute"] = sample_attribute
         return Resource(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            sample_attribute: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["sampleAttribute"] = sample_attribute
+        return pulumi.runtime.exists_resource(None, 'xyz:index/resource:Resource', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="sampleAttribute")
     def sample_attribute(self) -> pulumi.Output[Optional[_builtins.str]]:
