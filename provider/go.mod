@@ -158,7 +158,7 @@ require (
 	github.com/pulumi/inflector v0.2.1 // indirect
 	github.com/pulumi/pulumi-cloud-sdk/go v1.20261117.1636 // indirect
 	github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet/v3 v3.119.0 // indirect
-	github.com/pulumi/pulumi-hcl v0.20.0 // indirect
+	github.com/pulumi/pulumi-hcl v0.20.1 // indirect
 	github.com/pulumi/pulumi-java v1.40.1 // indirect
 	github.com/pulumi/pulumi-yaml v1.39.1 // indirect
 	github.com/pulumi/pulumi/sdk/v3 v3.276.0 // indirect
@@ -213,7 +213,6 @@ require (
 	go.uber.org/atomic v1.12.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/crypto v0.59.0 // indirect
-	golang.org/x/crypto/openpgp v0.1.0-deprecated // indirect
 	golang.org/x/exp v0.0.0-20261014143641-f0251eb4aa3e // indirect
 	golang.org/x/mod v0.42.0 // indirect
 	golang.org/x/net v0.62.0 // indirect
