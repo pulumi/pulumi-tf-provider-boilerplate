@@ -3,8 +3,8 @@ module github.com/pulumi/pulumi-xyz/provider
 go 1.26.10
 
 require (
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.143.0
-	github.com/pulumi/pulumi/pkg/v3 v3.277.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.143.1-0.20261124170342-7f8afdddeb60
+	github.com/pulumi/pulumi/pkg/v3 v3.278.0
 	github.com/pulumi/terraform-provider-xyz v0.0.3
 )
 
@@ -157,11 +157,11 @@ require (
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
 	github.com/pulumi/inflector v0.2.1 // indirect
 	github.com/pulumi/pulumi-cloud-sdk/go v1.20261124.0 // indirect
-	github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet/v3 v3.120.1 // indirect
-	github.com/pulumi/pulumi-hcl v0.20.3 // indirect
-	github.com/pulumi/pulumi-java v1.40.3 // indirect
+	github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet/v3 v3.121.0 // indirect
+	github.com/pulumi/pulumi-hcl v0.20.4 // indirect
+	github.com/pulumi/pulumi-java v1.40.4 // indirect
 	github.com/pulumi/pulumi-yaml v1.39.2 // indirect
-	github.com/pulumi/pulumi/sdk/v3 v3.277.0 // indirect
+	github.com/pulumi/pulumi/sdk/v3 v3.278.0 // indirect
 	github.com/pulumi/terraform-diff-reader v0.0.2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
